@@ -1,9 +1,9 @@
 .bg-black{
-    background-color: rgb(117, 114, 114);
+    background-color: rgb(138, 136, 136);
 }
 
 :host ::ng-deep .p-menu .p-menuitem-link .p-menuitem-text{
-    color: antiquewhite !important;
+    color: rgb(32, 32, 32) !important;
     font-weight: normal;
 }
 
@@ -13,11 +13,11 @@
 
 :host ::ng-deep .p-menu .p-submenu-header{
     color: rgb(4, 42, 148) !important;
-    background-color: rgb(117, 114, 114) !important;
+    background-color: rgb(138, 136, 136) !important;
 }
 
 :host ::ng-deep .p-menu {
-    background-color: rgb(117, 114, 114) !important;
+    background-color: rgb(138, 136, 136) !important;
 }
 
 :host ::ng-deep .p-menu .p-menu-separator{

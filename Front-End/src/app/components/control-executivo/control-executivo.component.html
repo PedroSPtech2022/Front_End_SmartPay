@@ -1,0 +1,55 @@
+<div class="card flex justify-content-center">
+    <p-card header="Simple Card">
+        <p-table #dt *ngIf=" custo_fixo && custo_fixo.length" [value]="custo_fixo" [paginator]="true" [rows]="10"
+                 [showCurrentPageReport]=true responsiveLayout="scroll" currentPageReportTemplate="Exibindo {first} to {last} of {totalRecords} entries"
+                 [rowsPerPageOptions]="10,15,25" [globalFilterFields]="['valor','tipo','tipo','responsavel']">
+        </p-table>
+
+        <ng-template pTemplate="caption">
+            <div class="flex justify-content-between">
+                <div><h4>Lista de Custos Fixos</h4></div>
+                <div class="p-input-icon-left">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" (input)="dt.filterGlobal($any($event.target).value,'contains')" placeholder="Buscar..."/>
+                </div>
+            </div>
+        </ng-template>
+
+        <ng-template pTemplate="header">
+            <tr>
+                <th pSortableColumn="id" class="white-space-nowrap" style="width: 10%;"><p-sortIcon field="id"></p-sortIcon></th>
+                <th pSortableColumn="responsavel" class="white-space-nowrap" style="width: 10%;"><p-sortIcon field="responsavel"></p-sortIcon></th>
+                <th pSortableColumn="tipo" class="white-space-nowrap" style="width: 10%;"><p-sortIcon field="tipo"></p-sortIcon></th>
+                <th pSortableColumn="valor" class="white-space-nowrap" style="width: 10%;"><p-sortIcon field="valor"></p-sortIcon></th>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" Let-custo_fixo>
+            <tr>
+                <td>{{custo_fixo.id}}</td>
+                <td>{{custo_fixo.responsavel}}</td>
+                <td>{{custo_fixo.tipo}}</td>
+                <td>{{custo_fixo.valor}}</td>
+            </tr>
+        </ng-template>
+    </p-card>
+</div>
+
+<p-dialog [(visible)]="dialog-costs-fixed" [modal]="true" showEffect="fade" [style]="{width: '35vw'}" [breakpoints]="{'1050px':'85vw'}" (onHide)="cancelarCadastro()">
+    <h5>Cadastrar Custos Fixos</h5>
+    <!-- <h4>Centro de Custos: {{centro_custos.name}}</h4> -->
+
+    <p class="line-height-3 m-0">Valor</p>
+    <div class="p-fluid p-formgrid grid">
+        <div class="field col-12 md:col-12" style="margin-bottom: 0;">
+            <div class="lables_filtro" style="width: 100%;">
+                <input pInputText [(ngModel)]="custo_fixo.valor" name="valorCustoFixo" class="form-control block" style="width: 300px;" placeholder="Valor do Custo Fixo;">
+            </div>
+        </div>
+    </div>
+
+    <ng-template pTemplate="footer">
+        <button pButton style="color: rgb(4, 42, 148); width: 150px; height: 51px;" Label="Voltar" class="p-button-outlined" (click)="display=false"></button>
+        <button pButton style="color: rgb(4, 42, 148); width: 150px; height: 51px;" Label="Cadastrar Custo" class="p-button-outlined" (click)="callingRegisterCost()"></button>
+    </ng-template>
+</p-dialog>
