@@ -1,0 +1,21 @@
+<div class="bg-black w-full h-screen">
+    <div class="flex align-content-center mb-2 pt-4">
+    </div>
+    <p-menu [model]="items" styleClass="w-full border-none">
+        <ng-template pTemplate="start">
+            <a class="flex text-white align-items-center p-menuitem-link pl-4 pb-3 pt-3">
+                <i class="pi pi-home"></i>
+                <span class="ml-2">Home</span>
+            </a>
+        </ng-template>
+        <ng-template *ngFor="let item of items">
+            <a [routerLink]="item.url" class="flex text-white align-items-center p-menuitem-link">
+                <i [class]="item.icon">
+            <span class="ml-2">{{item.label}}</span>
+                </i>
+            </a>
+        </ng-template>
+    </p-menu>
+</div>
+
+<!-- [ngClass]="{'active':isActive(item.url)}" -->

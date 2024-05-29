@@ -1,0 +1,26 @@
+.bg-black{
+    background-color: rgb(117, 114, 114);
+}
+
+:host ::ng-deep .p-menu .p-menuitem-link .p-menuitem-text{
+    color: antiquewhite !important;
+    font-weight: normal;
+}
+
+:host ::ng-deep .p-menu .p-menuitem-link .p-menuitem-icon{
+    color: rgb(4, 42, 148) !important;
+}
+
+:host ::ng-deep .p-menu .p-submenu-header{
+    color: rgb(4, 42, 148) !important;
+    background-color: rgb(117, 114, 114) !important;
+}
+
+:host ::ng-deep .p-menu {
+    background-color: rgb(117, 114, 114) !important;
+}
+
+:host ::ng-deep .p-menu .p-menu-separator{
+    border-top: 1px solid rgb(4, 42, 148);
+    margin: 10px;
+}
