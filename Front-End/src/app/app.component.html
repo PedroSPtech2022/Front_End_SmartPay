@@ -1,12 +1,14 @@
 <div class="min-h-screen flex flex-column">
-  <div class="w-full flex">
-    <div class="w-2 fixed">
-    <app-sidebar/>
+    <div class="w-full flex">
+          <div class="w-2 fixed">
+                  <app-sidebar />
+          </div>
+          <div class="content-wrapper flex flex-column">
+                <app-topbar />
+                <div class="flex-grow-1">
+                        <router-outlet></router-outlet>
+                </div>
+                <app-footer />
+          </div>
     </div>
-    <div class="content-wrapper flex flex-column">
-      <div class="flex-grow-1">
-    <router-outlet></router-outlet>
-      </div>
-    </div>
-  </div>
 </div>

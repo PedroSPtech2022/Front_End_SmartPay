@@ -8,8 +8,8 @@
                 <span class="ml-2">Home</span>
             </a>
         </ng-template>
-        <ng-template *ngFor="let item of items">
-            <a [routerLink]="item.url" class="flex text-white align-items-center p-menuitem-link">
+        <ng-template pTemplate="item" let-item>
+            <a [routerLink]="item.url" class="flex text-white align-items-center p-menuitem-link" [ngClass]="{'active':isActive(item.url)}">
                 <i [class]="item.icon">
             <span class="ml-2">{{item.label}}</span>
                 </i>
@@ -17,5 +17,3 @@
         </ng-template>
     </p-menu>
 </div>
-
-<!-- [ngClass]="{'active':isActive(item.url)}" -->
