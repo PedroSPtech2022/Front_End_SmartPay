@@ -29,6 +29,7 @@ import { InputIconModule } from 'primeng/inputicon';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { RegistryEmployeeComponent } from "./component/registry-employee/registry-employee.component";
 import { ListVariableCostComponent } from "./component/list-variable-cost/list-variable-cost.component";
+import { PanelModule } from 'primeng/panel';
 
 @NgModule({
     declarations:[
@@ -64,7 +65,8 @@ import { ListVariableCostComponent } from "./component/list-variable-cost/list-v
         ToggleButtonModule,
         IconFieldModule,
         InputIconModule,
-        SelectButtonModule
+        SelectButtonModule,
+        PanelModule
     ],
     providers:[],
     bootstrap:[AppComponent]

@@ -1,13 +1,12 @@
-<div class="card" style="margin-top: 25px;">
+
+<p-card content="Simple Card">
+    <!-- <div class="flex h-screen"> -->
 <div class="card flex justify-content-center">
     <p-stepper [(activeStep)]="active">
         <p-stepperPanel>
             <ng-template pTemplate="header" let-onClick="onClick" let-index="index">
                 <button class="bg-transparent border-none inline-flex flex-column gap-2" (click)="onClick.emit()">
-                    <span
-                        class="border-round border-2 w-3rem h-3rem inline-flex align-items-center justify-content-center"
-                        
-                    >
+                    <span class="border-round border-2 w-3rem h-3rem inline-flex align-items-center justify-content-center">
                         <i class="pi pi-user"></i>
                     </span>
                 </button>
@@ -48,10 +47,7 @@
         <p-stepperPanel>
             <ng-template pTemplate="header" let-onClick="onClick" let-index="index">
                 <button class="bg-transparent border-none inline-flex flex-column gap-2" (click)="onClick.emit()">
-                    <span
-                        class="border-round border-2 w-3rem h-3rem inline-flex align-items-center justify-content-center"
-                        
-                    >
+                    <span class="border-round border-2 w-3rem h-3rem inline-flex align-items-center justify-content-center">
                         <i class="pi pi-building"></i>
                     </span>
                 </button>
@@ -93,17 +89,14 @@
         <p-stepperPanel>
             <ng-template pTemplate="header" let-onClick="onClick" let-index="index">
                 <button class="bg-transparent border-none inline-flex flex-column gap-2" (click)="onClick.emit()">
-                    <span
-                        class="border-round border-2 w-3rem h-3rem inline-flex align-items-center justify-content-center"
-                    
-                    >
+                    <span class="border-round border-2 w-3rem h-3rem inline-flex align-items-center justify-content-center">
                         <i class="pi pi-check-circle"></i>
                     </span>
                 </button>
             </ng-template>
             <ng-template pTemplate="content" let-prevCallback="prevCallback">
                 <div class="flex flex-column gap-2 mx-auto" style="min-height: 16rem; max-width: 24rem">
-                    <div class="text-center mt-3 mb-3 text-xl font-semibold">Account created successfully</div>
+                    <div class="text-center mt-3 mb-3 text-xl font-semibold">Conta Criada com Sucesso</div>
                     <div class="text-center">
                         <img alt="logo" src="https://primefaces.org/cdn/primeng/images/stepper/content.svg" />
                     </div>
@@ -115,4 +108,5 @@
         </p-stepperPanel>
     </p-stepper>
 </div>
-</div>
+<!-- </div> -->
+</p-card>
