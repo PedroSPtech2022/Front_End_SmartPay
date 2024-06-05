@@ -12,7 +12,7 @@ import { AppRoutingModule } from "./app.routing-module";
 import { TableModule } from "primeng/table";
 import { HttpClientModule } from "@angular/common/http";
 import { ToolbarModule } from 'primeng/toolbar';
-import { ListUserComponent } from "./component/list-user/list-user.component";
+import { ListEmployeeComponent } from "./component/list-employee/list-employee.component";
 import { InputTextModule } from "primeng/inputtext";
 import { ButtonModule } from "primeng/button";
 import { InputNumberModule } from "primeng/inputnumber";
@@ -39,7 +39,7 @@ import { PanelModule } from 'primeng/panel';
         TopbarComponent,
         FirtAcessExecutivoComponent,
         RegistryEmployeeComponent,
-        ListUserComponent,
+        ListEmployeeComponent,
         ListVariableCostComponent
     ],
     imports:[

@@ -1,27 +1,35 @@
+<p-card>
 <div class="card" style="margin-top: 25px;">
-    <p-table #dt [value]="users" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" responsiveLayout="scroll" [rowsPerPageOptions]="[5,10]" [globalFilterFields]="['name','email','center-cost']">
-        <ng-template>
+    <p-table #dt [value]="costs" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" responsiveLayout="scroll" [rowsPerPageOptions]="[5,10]" [globalFilterFields]="['name','email','center-cost']">
+        <ng-template pTemplate="caption">
             <div class="flex flex-wrap gap-2 align-items-center justify-content-between">
-                <h4>Lista de Usuários</h4>
+                <h4>Lista de Custos Variáveis</h4>
                 <input pInputText type="text" (input)="onGlobalFilter(dt,$event)" placeholder="Filtro de campos" class="w-full sm:w-auto">
             </div>
         </ng-template>
 
         <ng-template pTemplate="header">
             <tr>
-                <th pSortableColumn="name" class="white-space-nowrap" style="width: 15%;">Nome<p-sortIcon field="name"></p-sortIcon></th>
+                <th pSortableColumn="name" class="white-space-nowrap" style="width: 15%;">Tipo<p-sortIcon field="type_variable"></p-sortIcon></th>
+                <th pSortableColumn="date" class="white-space-nowrap" style="width: 15%;">Data<p-sortIcon field="date"></p-sortIcon></th>
+                <th pSortableColumn="responsible" class="white-space-nowrap" style="width: 15%;">Responsavel<p-sortIcon field="responsible"></p-sortIcon></th>
+                <th pSortableColumn="approval" class="white-space-nowrap" style="width: 15%;">Situação<p-sortIcon field="approval"></p-sortIcon></th>
+                <th pSortableColumn="approval" class="white-space-nowrap" style="width: 15%;">Mais Informações</th>
             </tr>
         </ng-template>
 
-        <ng-template pTemplate="body" let-User>
+        <ng-template pTemplate="body" let-Cost>
             <tr>
-                <td>{{user.name}}</td>
-                <!-- <td><span (click)="openModal(user)" style="margin-left: 50%; width: 25px; height: 25px; display: block; border-radius: 50%; text-align: center; padding: 3px;"><i class="pi pi-info" style="color: #fff;"></i></span></td> -->
+                <td>{{cost.type}}</td>
+                <td>{{cost.date}}</td>
+                <td>{{cost.responsible}}</td>
+                <td>{{cost.approval}}</td>
+                <td><p-button icon="pi pi-info" [rounded]="true" severity="info" [outlined]="true" (onClick)="openModal(cost)" /></td>
             </tr>
         </ng-template>
     </p-table>
 </div>
-
+</p-card>
 <!-- <p-dialog [(visible)]="display" [modal]="true" showEffect="fade" [style]="{width: '30vw'}" [breakpoints]="{'960px':'73vw'}">
     <h5>Usuário: {{user.name}}</h5>
 

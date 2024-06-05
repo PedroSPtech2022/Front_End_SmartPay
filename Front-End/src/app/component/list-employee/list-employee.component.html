@@ -1,0 +1,78 @@
+<p-card>
+<div class="card" style="margin-top: 25px;">
+    <p-table #dt [value]="employees" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" responsiveLayout="scroll" [rowsPerPageOptions]="[5,10]" [globalFilterFields]="['name','email','center-cost']">
+        <ng-template pTemplate="caption">
+            <div class="flex flex-wrap gap-2 align-items-center justify-content-between">
+                <h4>Lista de Funcionários</h4>
+                <input pInputText type="text" (input)="onGlobalFilter(dt,$event)" placeholder="Filtro de campos" class="w-full sm:w-auto">
+            </div>
+        </ng-template>
+
+        <ng-template pTemplate="header">
+            <tr>
+                <th pSortableColumn="name" class="white-space-nowrap" style="width: 15%;">Nome<p-sortIcon field="name"></p-sortIcon></th>
+                <th pSortableColumn="email" class="white-space-nowrap" style="width: 15%;">Email<p-sortIcon field="email"></p-sortIcon></th>
+                <th class="white-space-nowrap" style="width: 5%;"></th>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-Employee>
+            <tr>
+                <td>{{employee.name}}</td>
+                <td>{{employee.email}}</td>
+                <td>
+                    <div class="flex">
+                        <p-button icon="pi pi-info" [rounded]="true" severity="info" [outlined]="true" (click)="openModalInfo(employee)"></p-button>
+                        <p-button icon="pi pi-pencil" [rounded]="true" severity="danger" [outlined]="true" (click)="openRegisterUser(employee)"></p-button>
+                    </div>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
+</p-card>
+
+<p-dialog [(visible)]="display" [modal]="true" showEffect="fade" [style]="{width: '30vw'}" [breakpoints]="{'960px':'73vw'}">
+    <h5>Funcionário</h5>
+        <p class="line-height-3 m-0">{{employee.name}}</p>
+    <div class="p-fluid p-formgrid grid">
+        <p class="line-height-3 m-0">{{employee.job_title}}</p>
+        <p class="line-height-3 m-0">{{employee.position}}</p>
+        <p class="line-height-3 m-0">{{employee.salary}}</p>
+    </div>
+</p-dialog>
+
+<p-dialog [(visible)]="displayRegisterUser" [modal]="true" showEffect="fade" [style]="{width: '30vw'}" [breakpoints]="{'1050px':'85vw'}">
+    <h5>Cadastrar Acesso</h5>
+    <h4>Funcionário: {{employee.name}}</h4>
+
+    <p class="line-height-3 m-0">Nome</p>
+    <div class="p-fluid p-formgrid grid">
+        <div class="field col-12 md:col-12" style="margin-bottom: 0;">
+            <div class="lables_filtro" style="width: 100%;">
+                <input pInputText [(ngModel)]="employee.name" name="name" class="form-control block" placeholder="Nome:">
+            </div>
+        </div>
+    </div>
+
+    <p class="line-height-3 m-0">Email</p>
+    <div class="p-fluid p-formgrid grid">
+        <div class="field col-12 md:col-12" style="margin-bottom: 0;">
+            <div class="lables_filtro" style="width: 100%;">
+                <input pInputText [(ngModel)]="employee.email" name="email" class="form-control block" placeholder="Email:">
+            </div>
+        </div>
+    </div>
+
+    <p class="line-height-3 m-0">Tipo de Usuário</p>
+    <div class="p-fluid p-formgrid grid">
+        <div class="field col-12 md:col-12" style="margin-bottom: 0;">
+            <p-dropdown appendTo="body" class="block w-8" [options]="types_user" [(ngModel)]="employeeUser.type_user" name="type_user" placeholder="Tipo de Acesso" (onChange)="typeUserRegister($event)">
+            </p-dropdown>
+        </div>
+    </div>
+
+    <ng-template pTemplate="footer">
+        <p-button class="col-4" label="Cadastrar" (click)="callRegistryUser()"/>
+    </ng-template>
+</p-dialog>

@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { User } from '../../interface/interface-user';
+import { Employee } from '../../interface/interface-employee';
 import { ListUserService } from '../../services/list-user.service';
 import { Table } from 'primeng/table';
+import { Cost_Variable } from '../../interface/interface-cost-variable';
 
 @Component({
   selector: 'app-list-variable-cost',
@@ -13,16 +14,16 @@ export class ListVariableCostComponent {
 
     display: boolean = false;
 
-    users: User[]=[];
-    user: User = {};
+    costs: Cost_Variable[] = [];
+    cost: Cost_Variable = {};
 
     stats: any[];
     nStats:any;
 
     constructor(private router: Router, private listUserService:ListUserService){
         this.stats = [
-            {label:'Desativar',value:'desativar'},
-            {label:'Ativar',value:'ativar'}
+            {label:'Aprovar',value:'desativar'},
+            {label:'Desaprovar',value:'ativar'}
         ]
     }
 
@@ -35,16 +36,16 @@ export class ListVariableCostComponent {
     }
 
     async getUsers(){
-        await this.listUserService.getUser().then(list => this.users = list)
+        await this.listUserService.getEmployee().then(list => this.costs = list)
     }
 
     postSelected(event:any){
         this.nStats = event.value
     }
 
-    openModal(user:User){
+    openModal(cost:Cost_Variable){
         this.display = true
-        this.user=user
+        this.cost=cost
     }
 
 }
