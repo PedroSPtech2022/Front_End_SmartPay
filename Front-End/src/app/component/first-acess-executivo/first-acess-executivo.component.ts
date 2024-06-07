@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-firt-acess-executivo',
-  templateUrl: './firt-acess-executivo.component.html',
-  styleUrl: './firt-acess-executivo.component.css'
+  selector: 'app-first-acess-executivo',
+  templateUrl: './first-acess-executivo.component.html',
+  styleUrl: './first-acess-executivo.component.css'
 })
-export class FirtAcessExecutivoComponent implements OnInit{
+export class FirstAcessExecutivoComponent implements OnInit{
   active: number | undefined = 0;
 
   name: string | undefined ;

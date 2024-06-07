@@ -21,7 +21,7 @@ import { AvatarGroupModule } from "primeng/avatargroup";
 import { DropdownModule } from "primeng/dropdown";
 import { PasswordModule } from "primeng/password";
 import { TopbarComponent } from "./component/topbar/topbar.component";
-import { FirtAcessExecutivoComponent } from "./component/firt-acess-executivo/firt-acess-executivo.component";
+import { FirstAcessExecutivoComponent } from "./component/first-acess-executivo/first-acess-executivo.component";
 import { StepperModule } from 'primeng/stepper';
 import { ToggleButtonModule } from 'primeng/togglebutton';
 import { IconFieldModule } from 'primeng/iconfield';
@@ -30,6 +30,8 @@ import { SelectButtonModule } from 'primeng/selectbutton';
 import { RegistryEmployeeComponent } from "./component/registry-employee/registry-employee.component";
 import { ListVariableCostComponent } from "./component/list-variable-cost/list-variable-cost.component";
 import { PanelModule } from 'primeng/panel';
+import { LoginComponent } from "./component/auth/login/login.component";
+import { NotFoundComponent } from "./component/not-found/not-found.component";
 
 @NgModule({
     declarations:[
@@ -37,10 +39,12 @@ import { PanelModule } from 'primeng/panel';
         SidebarComponent,
         FooterComponent,
         TopbarComponent,
-        FirtAcessExecutivoComponent,
+        FirstAcessExecutivoComponent,
         RegistryEmployeeComponent,
         ListEmployeeComponent,
-        ListVariableCostComponent
+        ListVariableCostComponent,
+        LoginComponent,
+        NotFoundComponent
     ],
     imports:[
         BrowserModule,
