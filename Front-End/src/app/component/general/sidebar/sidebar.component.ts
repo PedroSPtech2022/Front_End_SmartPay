@@ -25,7 +25,7 @@ export class SidebarComponent {
       return this.activeUrl == itemUrl
     }
 
-    validateUser(){
+    validateUserExecutive(){
       this.items = [
         {
           separator:true
@@ -70,6 +70,33 @@ export class SidebarComponent {
           },],          
         }
       ];
+    }
+
+    validateUserEmployee(){
+      this.items = [
+        {
+          separator:true
+        },
+        {
+          label:'Gastos Variaveis',
+          items:[
+            {
+            label:'Lista de Gastos Variaveis',
+            icon:'pi pi-table',
+            url: '/employee/list-cost-variable'
+            }
+          ],          
+        }
+      ];
+    }
+
+    validateUser(){
+      const type_user = sessionStorage.getItem("type_user");
+      if(type_user == "EXEC"){
+      this.validateUserExecutive();
+      } else if(type_user == "FUNC"){
+        this.validateUserEmployee();
+      }
     }
 }
 

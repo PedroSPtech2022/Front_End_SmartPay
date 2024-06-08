@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Employee, EmployeeUser } from '../../interface/interface-employee';
-import { ListUserService } from '../../services/list-user.service';
+import { Employee, EmployeeUser } from '../../../interface/interface-employee';
+import { ListUserService } from '../../../services/list-user.service';
 import { Table } from 'primeng/table';
 import { HttpResponse } from '@angular/common/http';
 

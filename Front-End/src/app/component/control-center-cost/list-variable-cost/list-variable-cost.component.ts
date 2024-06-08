@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { Employee } from '../../interface/interface-employee';
-import { ListUserService } from '../../services/list-user.service';
+import { Employee } from '../../../interface/interface-employee';
+import { ListUserService } from '../../../services/list-user.service';
 import { Table } from 'primeng/table';
-import { Cost_Variable } from '../../interface/interface-cost-variable';
+import { Cost_Variable } from '../../../interface/interface-cost-variable';
 
 @Component({
   selector: 'app-list-variable-cost',

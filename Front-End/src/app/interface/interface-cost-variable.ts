@@ -1,4 +1,5 @@
 export interface Cost_Variable{
+    name_cost?:string;
     type?:string;
     type_variable?: string,
     describe?: string,

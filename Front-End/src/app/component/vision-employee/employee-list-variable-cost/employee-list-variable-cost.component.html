@@ -1,0 +1,92 @@
+<p-card>
+    <div class="card" style="margin-top: 25px;">    
+        <div class="flex" style="margin-bottom: 20px;">
+            <p-button label="Cadastrar Custo Variável" icon="pi pi-plus" (click)="openRegistryCost()" />
+        </div>
+            <p-table #dt [value]="costs" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" responsiveLayout="scroll" [rowsPerPageOptions]="[5,10]" [globalFilterFields]="['name','email','center-cost']">
+                <ng-template pTemplate="caption">
+                    <div class="flex flex-wrap gap-2 align-items-center justify-content-between">
+                        <h4>Lista de Custos Variáveis</h4>
+                        <input pInputText type="text" (input)="onGlobalFilter(dt,$event)" placeholder="Filtro de campos" class="w-full sm:w-auto">
+                    </div>
+                </ng-template>
+        
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th pSortableColumn="name_cost" class="white-space-nowrap" style="width: 15%;">Custo<p-sortIcon field="name_cost"></p-sortIcon></th>
+                            <th pSortableColumn="date" class="white-space-nowrap" style="width: 15%;">Data<p-sortIcon field="date"></p-sortIcon></th>
+                            <th pSortableColumn="approval" class="white-space-nowrap" style="width: 15%;">Situação<p-sortIcon field="approval"></p-sortIcon></th>
+                            <th class="white-space-nowrap" style="width: 15%;">Mais Informações</th>
+                        </tr>
+                    </ng-template>
+        
+                <ng-template pTemplate="body" let-Cost>
+                    <tr>
+                        <td>{{cost.name_cost}}</td>
+                        <td>{{cost.date}}</td>
+                        <td>{{cost.approval}}</td>
+                        <td><p-button icon="pi pi-info" [rounded]="true" severity="info" [outlined]="true" (onClick)="openModal(cost)" /></td>
+                    </tr>
+                </ng-template>
+            </p-table>
+    </div>
+</p-card>
+
+<p-dialog [(visible)]="display" [modal]="true" showEffect="fade" [style]="{width: '32vw'}" [breakpoints]="{'960px':'78vw'}">
+        <h4>Cadastro de Custo Variável</h4>
+
+            <p class="line-height-3 m-0" style="margin-top: 5px;">Custo:</p>
+            <div class="p-fluid p-formgrid grid">
+                <div class="field col-12 md:col-12" style="margin-bottom: 0;">
+                    <input pInputText type="text" id="name_cost">
+                </div>
+            </div>
+
+            <p class="line-height-3 m-0" style="margin-top: 5px;">Valor:</p>
+            <div class="p-fluid p-formgrid grid">
+                <div class="field col-12 md:col-12" style="margin-bottom: 0;">
+                    <input pInputText type="text" id="value">
+                </div>
+            </div>
+
+            <div class="p-fluid p-formgrid grid" style="margin-top: 5px;">
+                <div class="field col-6 md:col-6" style="margin-bottom: 0;">
+                    <label for="category">Categoria:</label>
+                    <p-dropdown appendTo="body" class="block w-full" [options]="categorys" [(ngModel)]="nCategorys" placeholder="Selecione uma categoria:" optionLabel="label" optionValue="value" (onChange)="postSelected($event)">
+                    </p-dropdown>
+                </div>
+                <div class="field col-6 md:col-6" style="margin-bottom: 0;">
+                    <label for="methods_payment">Metodo de Pagamento:</label>
+                    <p-dropdown appendTo="body" class="block w-full" [options]="methodsPay" [(ngModel)]="nMethodsPay" placeholder="Selecione um metodo de pagamento:" optionLabel="label" optionValue="value" (onChange)="postSelected($event)">
+                    </p-dropdown>
+                </div>
+            </div>
+        
+            <p class="line-height-3 m-0" style="margin-top: 5px;">Data:</p>
+            <div class="p-fluid p-formgrid grid">
+                <div class="field col-12 md:col-12" style="margin-bottom: 0;">
+                    <p-calendar id="date" dateFormat="dd.mm.yy" [showIcon]="true" [showOnFocus]="false"/>
+                </div>
+            </div>
+
+            <p class="line-height-3 m-0" style="margin-top: 5px;">Descrição:</p>
+            <div class="p-fluid p-formgrid grid " >
+                <div class="field col-12 md:col-12" style="margin-bottom: 0;">
+                    <textarea rows="5" cols="79" pInputTextarea id="describe"></textarea>
+                </div>
+            </div>
+
+            <div class="p-fluid p-formgrid grid" style="margin-top: 5px;">
+                <div class="field col-12 md:col-12" style="margin-bottom: 0;">
+                    <p-button label="Finalizar Cadastro" (click)="registryCost()" />
+                </div>
+            </div>
+</p-dialog>
+
+<p-dialog [(visible)]="displayInfo" [modal]="true" showEffect="fade" [style]="{width: '32vw'}" [breakpoints]="{'330x':'30vw'}">
+    <h4>Informações Adicionais</h4>
+    <p>Valor: {{cost.value}}</p>
+    <p>Descrição: {{cost.describe}}</p>
+    <p>Observações: {{cost.obs}}</p>
+    <p>Metodo de Pagamento: {{cost.payment_method}}</p>
+</p-dialog>
