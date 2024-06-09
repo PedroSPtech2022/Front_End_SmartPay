@@ -1,5 +1,5 @@
-<div  class="min-h-screen flex flex-column">
-      <!-- *ngIf="!isTelaLogin && !isTelaFirstAcess" -->
+<div  class="min-h-screen flex flex-column" *ngIf="!isTelaLogin && !isTelaFirstAcess">
+      <!--  -->
     <div class="w-full flex">
           <div class="w-2 fixed">
                   <app-sidebar />
@@ -14,12 +14,12 @@
     </div>
 </div>
 
-<div >
-      <!-- *ngIf="isTelaFirstAcess && !isTelaLogin" -->
+<div *ngIf="isTelaFirstAcess && !isTelaLogin">
+      <!--  -->
       <app-first-acess-executivo />
 </div>
 
-<div >
-      <!-- *ngIf="isTelaLogin && !isTelaFirstAcess" -->
+<div *ngIf="isTelaLogin && !isTelaFirstAcess">
+      <!--  -->
       <app-login />
 </div>

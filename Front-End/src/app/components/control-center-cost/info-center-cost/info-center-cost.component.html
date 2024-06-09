@@ -1,0 +1,39 @@
+<p-card>
+    <div class="p-fluid p-formgrid grid" style="margin-top: 5px;">
+        <div class="field col-6 md:col-6" style="margin-bottom: 0;">
+            <label for="category">Centro de Custo:</label>
+            <h5>Nome</h5>
+        </div>
+        <div class="field col-6 md:col-6" style="margin-bottom: 0;">
+            <label for="category">Orçamento Trimestral:</label>
+            <h5>Valor</h5>
+        </div>
+    </div>
+    <div class="p-fluid p-formgrid grid" style="margin-top: 5px;">
+        <div class="field col-6 md:col-6" style="margin-bottom: 0;">
+            <label for="category">Custos Fixos Totais:</label>
+            <h5>Valor</h5>
+        </div>
+        <div class="field col-6 md:col-6" style="margin-bottom: 0;">
+            <label for="category">Custos Variáveis Totais:</label>
+            <h5>Valor</h5>
+        </div>
+    </div>
+</p-card>
+<p-card>
+    <p class="line-height-3 m-0" style="margin-top: 3px;">Saúde do Centro de Custos:</p>
+    
+        <div class="card flex justify-content-center">
+            
+            <p-knob value="60" [size]="200" />
+           
+        </div>
+        <div style="display: flex; margin-left: 95%;">
+        <p-button icon="pi pi-info" [rounded]="true" severity="info" [outlined]="true" (onClick)="openModal()" />
+        </div> 
+</p-card>
+
+<p-dialog [(visible)]="displayInfo" [modal]="true" showEffect="fade" [style]="{width: '32vw'}" [breakpoints]="{'330x':'30vw'}">
+    <h4>Informações para Apoio de Decisão</h4>
+    <p>{{messageInfo}}</p>
+</p-dialog>

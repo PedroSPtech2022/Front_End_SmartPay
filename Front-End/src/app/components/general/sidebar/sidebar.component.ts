@@ -66,7 +66,7 @@ export class SidebarComponent {
             {
             label:'Informações de Centro de Custos',
             icon:'pi pi-exclamation-circle',
-            url: ''
+            url: 'executivo/info-center-cost'
           },],          
         }
       ];
@@ -99,22 +99,3 @@ export class SidebarComponent {
       }
     }
 }
-
-
-// {
-        //   separator:true
-        // },
-        // {
-        //   label:'Usuario',
-        //   items:[
-        //     {
-        //     label:'Cadastrar Funcionario',
-        //     icon:'pi pi-plus',
-        //     url:'control-executivo'
-        //   },
-        //   {
-        //     label:'Listar Funcionarios',
-        //     icon:'pi pi-plus',
-        //     url:'control-executivo'
-        //   }],          
-        // },
