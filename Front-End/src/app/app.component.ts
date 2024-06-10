@@ -17,17 +17,17 @@ export class AppComponent {
   constructor(private router: Router, private isLogged: LoginService){}
 
   ngOnInit(){
-    // this.router.events.subscribe(()=>{
-    //   if(this.isLogged.isLoggedIn()){
-    //     this.isTelaLogin = false;
-    //   } else if(this.router.url == "/executivo/first-acess"){
-    //     this.isTelaFirstAcess = true;
-    //     this.isTelaLogin = false;
-    //   }else{
-    //     this.isTelaFirstAcess = false;
-    //     this.isTelaLogin = true;
-    //   }
-    // });
+    this.router.events.subscribe(()=>{
+      if(this.isLogged.isLoggedIn()){
+        this.isTelaLogin = false;
+      } else if(this.router.url == "/executivo/first-acess"){
+        this.isTelaFirstAcess = true;
+        this.isTelaLogin = false;
+      }else{
+        this.isTelaFirstAcess = false;
+        this.isTelaLogin = true;
+      }
+    });
   }
   
 }

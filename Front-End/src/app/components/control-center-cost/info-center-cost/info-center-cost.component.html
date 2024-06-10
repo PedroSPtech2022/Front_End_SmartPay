@@ -21,19 +21,22 @@
     </div>
 </p-card>
 <p-card>
-    <p class="line-height-3 m-0" style="margin-top: 3px;">Saúde do Centro de Custos:</p>
-    
-        <div class="card flex justify-content-center">
-            
-            <p-knob value="60" [size]="200" />
-           
-        </div>
+    <h4>Budget Atual Usado: (%)</h4>
         <div style="display: flex; margin-left: 95%;">
-        <p-button icon="pi pi-info" [rounded]="true" severity="info" [outlined]="true" (onClick)="openModal()" />
-        </div> 
+            <p-button icon="pi pi-info" [rounded]="true" severity="info" [outlined]="true" (onClick)="openModal()" />
+        </div>
+
+        <div class="card flex justify-content-center">
+            <p-knob [(ngModel)]="valuePKONB" [size]="200" />   
+        </div>
+
+        <h4>Relação entre tipos de custos:</h4>
+        <div class="card">
+            <p-meterGroup [value]="value" />
+        </div>
 </p-card>
 
 <p-dialog [(visible)]="displayInfo" [modal]="true" showEffect="fade" [style]="{width: '32vw'}" [breakpoints]="{'330x':'30vw'}">
-    <h4>Informações para Apoio de Decisão</h4>
+    <h4>Informações para Apoio de Decisão  <i class="pi pi-microchip-ai" style="font-size: 1rem"></i></h4>
     <p>{{messageInfo}}</p>
 </p-dialog>

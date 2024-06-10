@@ -2,26 +2,33 @@
     <div class="m-0 grid">
         <div class="flex flex-column gap-2 col-12 p-fluid">
             <label for="name">Nome</label>
-            <input pInputText type="text" id="name">
+            <input [(ngModel)]="employee.name" pInputText type="text" id="name">
         </div>
         <div class="flex flex-column gap-2 col-12 p-fluid">
             <label for="email">E-mail</label>
-            <input pInputText type="email" id="email">
+            <input  [(ngModel)]="employee.email"  pInputText type="email" id="email">
         </div>
+    
         <div class="flex flex-column gap-2 col-12 p-fluid">
             <label for="job_title">Cargo</label>
-            <input pInputText type="text" id="job_title">
+            <input [(ngModel)]="employee.job_title"  pInputText type="text" id="job_title">
         </div>
+    
         <div class="flex flex-column gap-2 col-12 p-fluid">
             <label for="salary">Salário</label>
-            <input pInputText type="text" id="salary">
+            <input [(ngModel)]="employee.salary"  pInputText type="text" id="salary">
         </div>
+        
         <div class="flex flex-column gap-2 col-12 p-fluid">
             <label for="position">Posição</label>
-            <input pInputText type="text" id="position">
+            <input [(ngModel)]="employee.position"  pInputText type="text" id="position">
         </div>
     </div>
     <div class="m-0 grid">
-        <p-button class="col-4" label="Cadastrar" />
+        <p-button class="col-4" label="Cadastrar" (click)="finishRegistry()" />
+        <p class="error-message" *ngIf="messageError">
+            <i class="pi pi-exclamation-circle" style="margin-right: 5px; color: red;"></i>
+            {{messageError}}
+        </p>
     </div>
 </p-card>

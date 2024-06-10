@@ -21,7 +21,7 @@
                                                 <p-inputIcon>
                                                     <i class="pi pi-user"></i>
                                                 </p-inputIcon>
-                                                <input [(ngModel)]="name" pInputText id="input" type="text" placeholder="Nome:" />
+                                                <input [(ngModel)]="first_acess.name" pInputText id="name" type="text" placeholder="Nome:" />
                                             </p-iconField>
                                         </div>
                                         <div class="field p-fluid">
@@ -29,7 +29,7 @@
                                                 <p-inputIcon>
                                                     <i class="pi pi-envelope"></i>
                                                 </p-inputIcon>
-                                                <input [(ngModel)]="email" pInputText id="email" type="email" placeholder="Email:" />
+                                                <input [(ngModel)]="first_acess.email" pInputText id="email" type="email" placeholder="Email:" />
                                             </p-iconField>
                                         </div>
                                         <div class="field p-fluid">
@@ -37,7 +37,7 @@
                                                 <p-inputIcon>
                                                     <i class="pi pi-key"></i>
                                                 </p-inputIcon>
-                                                <input [(ngModel)]="password" pInputText id="password" type="password" placeholder="Senha:" />
+                                                <input [(ngModel)]="first_acess.password" pInputText id="password" type="password" placeholder="Senha:" />
                                             </p-iconField>
                                         </div>
                                     </div>
@@ -62,7 +62,15 @@
                                                 <p-inputIcon>
                                                     <i class="pi pi-building"></i>
                                                 </p-inputIcon>
-                                                <input [(ngModel)]="cost_center_name" pInputText id="input" type="text" placeholder="Nome centro de custos" />
+                                                <input [(ngModel)]="center_cost.cost_center_name" pInputText id="cost_center_name" type="text" placeholder="Nome centro de custos" />
+                                            </p-iconField>
+                                        </div>
+                                        <div class="field p-fluid">
+                                            <p-iconField>
+                                                <p-inputIcon>
+                                                    <i class="pi pi-home"></i>
+                                                </p-inputIcon>
+                                                <input [(ngModel)]="center_cost.area" pInputText id="cost_center_area" type="text" placeholder="Área" />
                                             </p-iconField>
                                         </div>
                                         <div class="field p-fluid">
@@ -70,7 +78,7 @@
                                                 <p-inputIcon>
                                                     <i class="pi pi-dollar"></i>
                                                 </p-inputIcon>
-                                                <input [(ngModel)]="quarterly_budget" pInputText id="quarterly_budget" type="numebr" placeholder="Orçamento trimestral" />
+                                                <input [(ngModel)]="center_cost.annual_budget" pInputText id="annual_budget" type="text" placeholder="Orçamento anual" />
                                             </p-iconField>
                                         </div>
                                         <div class="field p-fluid">
@@ -78,13 +86,12 @@
                                             [options]="producao" 
                                             [(ngModel)]="selectedTypeProducao" 
                                             optionLabel="tipo"
-                                            placeholder="Selecione uma opção abaixo" />
-                                
+                                            placeholder="Selecione uma opção abaixo" (ngModelChange)="selectedTypeProd($event)"/>
                                         </div>
                                     </div>
                                     <div class="flex pt-4 justify-content-between">
                                         <p-button (onClick)="prevCallback.emit()" label="Voltar" severity="secondary" icon="pi pi-arrow-left" />
-                                        <p-button (onClick)="nextCallback.emit()" label="Finalizar Cadastro" icon="pi pi-arrow-right" iconPos="right" />
+                                        <p-button (onClick)="nextCallback.emit()" label="Cadastrar Centro de Custos" icon="pi pi-arrow-right" iconPos="right" />
                                     </div>
                                 </ng-template>
                             </p-stepperPanel>
@@ -96,7 +103,7 @@
                                         </span>
                                     </button>
                                 </ng-template>
-                                <ng-template pTemplate="content" let-prevCallback="prevCallback">
+                                <ng-template pTemplate="content" let-prevCallback="prevCallback" let-nextCallback="nextCallback">
                                     <div class="flex flex-column gap-2 mx-auto" style="min-height: 16rem; max-width: 24rem">
                                         <div class="text-center mt-3 mb-3 text-xl font-semibold">Conta Criada com Sucesso</div>
                                         <div class="text-center">
@@ -104,7 +111,12 @@
                                         </div>
                                     </div>
                                     <div class="flex pt-4 justify-content-start">
-                                        <p-button (onClick)="prevCallback.emit()" label="Back" severity="secondary" icon="pi pi-arrow-left" />
+                                        <p-button (onClick)="prevCallback.emit()" label="Voltar" severity="secondary" icon="pi pi-arrow-left" />
+                                        <p-button (onClick)="finishRegistry()" label="Finalizar Cadastro" icon="pi pi-check" iconPos="right" />
+                                        <p class="error-message" *ngIf="messageError">
+                                            <i class="pi pi-exclamation-circle" style="margin-right: 5px; color: red;"></i>
+                                            {{messageError}}
+                                        </p>
                                     </div>
                                 </ng-template>
                             </p-stepperPanel>

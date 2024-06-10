@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from '../../../services/login-service';
 import { Table } from 'primeng/table';
-import { Login } from '../../../interface/interface-login';
+import { Login, Login_Response } from '../../../interface/interface-login';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +14,8 @@ export class LoginComponent implements OnInit{
   isLoading: boolean = false;
   messageError: string = '';
 
-  logins: Login = {token: '', user:{ name: '', email: '', password:'', type_user: '' }};
+  logins: Login = {email: '', password:''};
+  logins_res: Login_Response = {token:'',name: '', email: '', password:'', type_user: '',id_executive: '',id_cost_center: ''};
 
   constructor(private router: Router, private loginService: LoginService){}
 
@@ -26,33 +27,40 @@ export class LoginComponent implements OnInit{
     table.filterGlobal((event.target as HTMLInputElement).value, 'contains')
   }
   
-  saveSession(name:string,type_user:string,email:string,token:string){
+  saveSession(name:string,type_user:string,email:string,token:string,id_executive:string,id_cost_center:string){
     sessionStorage.setItem("name",name);
     sessionStorage.setItem("type_user",type_user);
     sessionStorage.setItem("token",token);
     sessionStorage.setItem("email",email);
+    sessionStorage.setItem("id_executive",id_executive);
+    sessionStorage.setItem("id_cost_center",id_cost_center);
   }
 
   loadingLogin(){
-    this.logins.user.email = (document.getElementById('email') as HTMLInputElement).value;
-    this.logins.user.password = (document.getElementById('password') as HTMLInputElement).value;
+    this.logins.email = (document.getElementById('email') as HTMLInputElement).value;
+    this.logins.password = (document.getElementById('password') as HTMLInputElement).value;
     this.isLoading = true;
 
     this.loginService.loadingLogin(this.logins).then(
-      (data:Login) =>{
-        this.logins = data;
+      (data:Login_Response) =>{
+        this.logins_res = data;
         this.isLoading = true;
 
-        if(this.logins.user.type_user === 'EXEC'){
-          this.saveSession(this.logins.user.name,this.logins.user.type_user,this.logins.user.email,this.logins.token);
+        if(this.logins_res.type_user === 'EXEC'){
+          this.saveSession(this.logins_res.name,this.logins_res.type_user,this.logins.email,this.logins_res.token,this.logins_res.id_executive,this.logins_res.id_cost_center);
           this.router.navigateByUrl('executivo/list-employee');
-        }else if(this.logins.user.type_user === 'FUNC'){
-          this.saveSession(this.logins.user.name,this.logins.user.type_user,this.logins.user.email,this.logins.token);
+        }else if(this.logins_res.type_user === 'FUNC'){
+          this.saveSession(this.logins_res.name,this.logins_res.type_user,this.logins.email,this.logins_res.token,this.logins_res.id_executive,this.logins_res.id_cost_center);
           this.router.navigateByUrl('executivo/list-variable-cost');
         } else {
           this.messageError = 'Erro ao tentar Logar';
           this.isLoading = false; 
         }
+      },
+      (error)=>{
+        this.messageError = "Erro ao tentar logar";
+        this.isLoading = false;
+        console.error(error);
       }
     )
   }

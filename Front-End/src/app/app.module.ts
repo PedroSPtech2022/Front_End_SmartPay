@@ -36,6 +36,8 @@ import { EmployeeListVariableCostComponent } from "./components/vision-employee/
 import { CalendarModule } from "primeng/calendar";
 import { InfoCenterCostComponent } from "./components/control-center-cost/info-center-cost/info-center-cost.component";
 import { KnobModule } from 'primeng/knob';
+import { MeterGroupModule } from 'primeng/metergroup';
+
 @NgModule({
     declarations:[
         AppComponent,
@@ -77,7 +79,8 @@ import { KnobModule } from 'primeng/knob';
         SelectButtonModule,
         PanelModule,
         CalendarModule,
-        KnobModule
+        KnobModule,
+        MeterGroupModule
     ],
     providers:[],
     bootstrap:[AppComponent]

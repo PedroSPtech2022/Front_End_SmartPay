@@ -1,14 +1,11 @@
 export interface Cost_Variable{
-    name_cost?:string;
-    type?:string;
     type_variable?: string,
     describe?: string,
     value?:number,
-    date?: Date,
+    date?: string,
     responsible?: string,
     category?: string,
     payment_method?: string,
     obs?: string,
-    approval?: true,
-    fk_cost_center?: 0
+    approval?: boolean,
 }

@@ -22,7 +22,7 @@
         
                 <ng-template pTemplate="body" let-Cost>
                     <tr>
-                        <td>{{cost.name_cost}}</td>
+                        <td>{{cost.obs}}</td>
                         <td>{{cost.date}}</td>
                         <td>{{cost.approval}}</td>
                         <td><p-button icon="pi pi-info" [rounded]="true" severity="info" [outlined]="true" (onClick)="openModal(cost)" /></td>
@@ -38,7 +38,7 @@
             <p class="line-height-3 m-0" style="margin-top: 5px;">Custo:</p>
             <div class="p-fluid p-formgrid grid">
                 <div class="field col-12 md:col-12" style="margin-bottom: 0;">
-                    <input pInputText type="text" id="name_cost">
+                    <input pInputText type="text" id="obs">
                 </div>
             </div>
 

@@ -3,6 +3,7 @@ import { Cost_Variable } from '../../../interface/interface-cost-variable';
 import { Router } from '@angular/router';
 import { ListUserService } from '../../../services/list-user.service';
 import { Table } from 'primeng/table';
+import { EmployeeVisionService } from '../../../services/employee-vision.service';
 
 @Component({
   selector: 'app-employee-list-variable-cost',
@@ -26,7 +27,7 @@ export class EmployeeListVariableCostComponent {
     categorys: any[];
     nCategorys: any;
 
-    constructor(private router: Router, private listUserService:ListUserService){
+    constructor(private router: Router, private employeeVisionService:EmployeeVisionService){
         this.stats = [
             {label:'Aprovar',value:'desativar'},
             {label:'Desaprovar',value:'ativar'}
@@ -46,15 +47,15 @@ export class EmployeeListVariableCostComponent {
     }
 
     ngOnInit(){
-        // this.getUsers();
+        // this.getCosts();
     }
 
     onGlobalFilter(table:Table, event: Event){
         table.filterGlobal((event.target as HTMLInputElement).value,'contains')
     }
 
-    async getUsers(){
-        await this.listUserService.getEmployee().then(list => this.costs = list)
+    async getCosts(){
+        await this.employeeVisionService.getCostEmployee().then(list => this.costs = list)
     }
 
     postSelected(event:any){
@@ -66,11 +67,22 @@ export class EmployeeListVariableCostComponent {
         this.cost=cost
     }
 
-    registryCost(){
-        
-    }
-
     openRegistryCost(){
         this.display = true;
     }
+
+    registryCost(){
+        this.cost.type_variable =""
+        this.cost.describe =""
+        this.cost.value =200
+        this.cost.date = ""
+        this.cost.responsible =""
+        this.cost.category =""
+        this.cost.payment_method =""
+        this.cost.obs =""
+        this.cost.approval = false;   
+
+        this.employeeVisionService.registryCost(this.cost)
+    }
+
 }
