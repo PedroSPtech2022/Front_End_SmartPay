@@ -4,9 +4,9 @@
         <div class="field col-6 md:col-6">
             <div class="flex flex-column align-items-center gap-3">
                 <label for="user" class="font-medium w-30rem" style="font-size: 16px; text-align: left;">Usuário</label>
-                <input pInputText id="email" class="w-30rem" style="border-radius: 4px;">
+                <input pInputText [(ngModel)]="logins.email" id="email" class="w-30rem" style="border-radius: 4px;">
                 <label for="password" class="font-medium w-30rem" style="font-size: 16px; text-align: left;">Senha</label>
-                <input pInputText id="password" class="w-30rem" style="border-radius: 4px;" type="password">
+                <input pInputText  [(ngModel)]="logins.password" id="password" class="w-30rem" style="border-radius: 4px;" type="password">
                 <div class="flex-column w-30rem mt-5">
                     <p class="error-message" *ngIf="messageError">
                         <i class="pi pi-exclamation-circle" style="margin-right: 5px; color: red;"></i>

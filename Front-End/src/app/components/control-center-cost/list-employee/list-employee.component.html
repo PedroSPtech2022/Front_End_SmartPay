@@ -12,20 +12,17 @@
             <tr>
                 <th pSortableColumn="name" class="white-space-nowrap" style="width: 15%;">Nome<p-sortIcon field="name"></p-sortIcon></th>
                 <th pSortableColumn="email" class="white-space-nowrap" style="width: 15%;">Email<p-sortIcon field="email"></p-sortIcon></th>
-                <th class="white-space-nowrap" style="width: 5%;"></th>
+                <th class="white-space-nowrap" style="width: 2%;"></th>
+                <th class="white-space-nowrap" style="width: 2%;"></th>
             </tr>
         </ng-template>
 
-        <ng-template pTemplate="body" let-Employee>
+        <ng-template pTemplate="body" let-employee>
             <tr>
                 <td>{{employee.name}}</td>
-                <td>{{employee.email}}</td>
-                <td>
-                    <div class="flex">
-                        <p-button icon="pi pi-info" [rounded]="true" severity="info" [outlined]="true" (click)="openModalInfo(employee)"></p-button>
-                        <p-button icon="pi pi-pencil" [rounded]="true" severity="danger" [outlined]="true" (click)="openRegisterUser(employee)"></p-button>
-                    </div>
-                </td>
+                <td>{{employee.email}}</td>                        
+                <td><p-button icon="pi pi-info" [rounded]="true" severity="info" [outlined]="true" (click)="openModalInfo(employee)"></p-button></td>
+                <td><p-button icon="pi pi-pencil" [rounded]="true" severity="danger" [outlined]="true" (click)="openRegisterUser(employee)"></p-button></td>
             </tr>
         </ng-template>
     </p-table>
@@ -33,13 +30,10 @@
 </p-card>
 
 <p-dialog [(visible)]="display" [modal]="true" showEffect="fade" [style]="{width: '30vw'}" [breakpoints]="{'960px':'73vw'}">
-    <h5>Funcionário</h5>
-        <p class="line-height-3 m-0">{{employee.name}}</p>
-    <div class="p-fluid p-formgrid grid">
-        <p class="line-height-3 m-0">{{employee.job_title}}</p>
-        <p class="line-height-3 m-0">{{employee.position}}</p>
-        <p class="line-height-3 m-0">{{employee.salary}}</p>
-    </div>
+    <h5>Funcionário: {{employee.name}}</h5>
+        <p class="line-height-3 m-0">Cargo: {{employee.job_title}}</p>
+        <p class="line-height-3 m-0">Senioridade: {{employee.position}}</p>
+        <p class="line-height-3 m-0">Salário: {{employee.salary}},00</p>
 </p-dialog>
 
 <p-dialog [(visible)]="displayRegisterUser" [modal]="true" showEffect="fade" [style]="{width: '30vw'}" [breakpoints]="{'1050px':'85vw'}">

@@ -18,26 +18,26 @@ export class FirstAcessService {
       return new HttpHeaders({
           'Access-Control-Allow-Origin':'*',
           'Content-Type':'application/json',
-          'Authorization': 'Bearer token' 
+          'authorization': 'authorization' 
       })
   }
 
   registryUser(acess_first:First_Acess): Promise<any>{
     const end_point = this.apiUrl + 'register';
     const headers = this.getHeaders();
-    return this.http.post(end_point,acess_first,{headers}).toPromise().then( res => res).catch(error => { console.error('Erro no End-Point',error); throw error});
+    return this.http.post(end_point,acess_first,{ headers: headers, observe: 'response' }).toPromise().then( res => res).catch(error => { console.error('Erro no End-Point',error); throw error});
   }
 
   createCostCenter(cost_center: Center_Cost): Promise<any>{
-    const end_point = this.apiUrl + 'cost_centers';
+    const end_point = this.apiUrl + 'cost-centers';
     const headers = this.getHeaders();
-    return this.http.post(end_point,cost_center,{headers}).toPromise().then( res => res).catch(error => { console.error('Erro no End-Point',error); throw error});
+    return this.http.post(end_point,cost_center,{ headers: headers, observe: 'response' }).toPromise().then( res => res).catch(error => { console.error('Erro no End-Point',error); throw error});
   }
 
   registryUserExec(user:User_Exec): Promise<any>{
-    const end_point = this.apiUrl + 'register-executive';
+    const end_point = this.apiUrl + 'register-executive/' + 1;
     const headers = this.getHeaders();
-    return this.http.post(end_point,user,{headers}).toPromise().then( res => res).catch(error => { console.error('Erro no End-Point',error); throw error});
+    return this.http.post(end_point,user,{ headers: headers, observe: 'response' }).toPromise().then(res => res).catch(error => { console.error('Erro no End-Point',error); throw error});
   }
 
 }

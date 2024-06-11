@@ -34,7 +34,7 @@ export class ListEmployeeComponent implements OnInit {
     }
 
     ngOnInit(){
-        // this.getUsers();
+        this.getUsers();
     }
 
     typeUserRegister(event:any){
@@ -69,7 +69,7 @@ export class ListEmployeeComponent implements OnInit {
     callRegistryUser(){
         const employeeUser = this.employeeUser
         this.listEmployeeService.registryUser(employeeUser).subscribe(response =>{
-            if(response.status == 200){
+            if(response.status == 201){
                 this.displayRegisterUser = false;
             }else{
                 console.log("registro falhou")

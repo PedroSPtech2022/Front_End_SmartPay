@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit{
   isLoading: boolean = false;
   messageError: string = '';
 
-  logins: Login = {email: '', password:''};
+  logins: Login = {};
   logins_res: Login_Response = {token:'',name: '', email: '', password:'', type_user: '',id_executive: '',id_cost_center: ''};
 
   constructor(private router: Router, private loginService: LoginService){}
@@ -37,20 +37,17 @@ export class LoginComponent implements OnInit{
   }
 
   loadingLogin(){
-    this.logins.email = (document.getElementById('email') as HTMLInputElement).value;
-    this.logins.password = (document.getElementById('password') as HTMLInputElement).value;
     this.isLoading = true;
 
-    this.loginService.loadingLogin(this.logins).then(
-      (data:Login_Response) =>{
-        this.logins_res = data;
+    this.loginService.loadingLogin(this.logins).then(res =>{
+        this.logins_res = res.body;
         this.isLoading = true;
 
         if(this.logins_res.type_user === 'EXEC'){
-          this.saveSession(this.logins_res.name,this.logins_res.type_user,this.logins.email,this.logins_res.token,this.logins_res.id_executive,this.logins_res.id_cost_center);
+          this.saveSession(this.logins_res.name,this.logins_res.type_user,this.logins_res.email,this.logins_res.token,this.logins_res.id_executive,this.logins_res.id_cost_center);
           this.router.navigateByUrl('executivo/list-employee');
         }else if(this.logins_res.type_user === 'FUNC'){
-          this.saveSession(this.logins_res.name,this.logins_res.type_user,this.logins.email,this.logins_res.token,this.logins_res.id_executive,this.logins_res.id_cost_center);
+          this.saveSession(this.logins_res.name,this.logins_res.type_user,this.logins_res.email,this.logins_res.token,this.logins_res.id_executive,this.logins_res.id_cost_center);
           this.router.navigateByUrl('executivo/list-variable-cost');
         } else {
           this.messageError = 'Erro ao tentar Logar';

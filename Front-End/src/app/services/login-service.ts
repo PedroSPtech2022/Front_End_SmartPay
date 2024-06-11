@@ -13,16 +13,15 @@ export class LoginService {
 
     constructor(private http: HttpClient, private router:Router) { }
 
-    httpHeaders = {
-        headers : new HttpHeaders({
+    loadingLogin(login: Login): Promise<any> { 
+        const headers = new HttpHeaders({
             'Content-Type':'application/json',
-            "Acess-Control-Allow-Origin":"*"
-        })
-    };
-
-    loadingLogin(login:Login): Promise<Login_Response>{
-        return this.http.post<Login_Response>(this.url, JSON.stringify(login), this.httpHeaders).toPromise().then(res => res as Login_Response);
+            "Acess-Control-Allow-Origin":"*",
+            'authorization': 'authorization'
+        });
+        return this.http.post(this.url, JSON.stringify(login), { headers: headers, observe: 'response' }).toPromise().then(res => res).catch(error => { throw error; });
     }
+    
 
     isLoggedIn():boolean{
         const perfil = sessionStorage.getItem('type_user');

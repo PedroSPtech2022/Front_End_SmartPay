@@ -14,7 +14,7 @@ export const routes: Routes = [
     // {path:'executivo/analytics', component: ControlExecutivoAnalyticsComponent}
     {path:'login', component: LoginComponent},
     {path:'executivo/first-acess', component: FirstAcessExecutivoComponent},
-    {path:'executivo/list-user', component: ListEmployeeComponent},
+    {path:'executivo/list-employee', component: ListEmployeeComponent},
     {path:'executivo/registry-employee', component: RegistryEmployeeComponent},
     {path:'executivo/list-cost-variable', component: ListVariableCostComponent},
     {path:'executivo/info-center-cost', component:InfoCenterCostComponent},
