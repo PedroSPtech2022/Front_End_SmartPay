@@ -1,11 +1,10 @@
 <div class="flex h-screen">
-    <div class=" w-12 hidden lg:flex justify-content-between align-items-center bg-cover" style="background: url(../../../assets/) center center no-repeat;">
-        <div class="field col-6 md:col-6"></div>
-        <div class="field col-6 md:col-6">
-            <div class="flex flex-column align-items-center gap-3">
-                <label for="user" class="font-medium w-30rem" style="font-size: 16px; text-align: left;">Usuário</label>
+    <div class=" w-12 hidden lg:flex justify-content-between align-items-center bg-cover" style="background: url(../../../../assets/8104960.jpg) center center no-repeat;" >
+        <div class="field col-6 md:col-6" style="background-color: rgba(80, 80, 83, 0.548); width: 35%; height: 45%; border-radius: 2%; border-bottom: 2%; margin-left: 10px;">
+            <div class="flex flex-column align-items-center gap-3" style="margin-top: 70px;">
+                <label for="user" class="font-medium w-30rem" style="font-size: 16px; text-align: left;color:white;">Usuário</label>
                 <input pInputText [(ngModel)]="logins.email" id="email" class="w-30rem" style="border-radius: 4px;">
-                <label for="password" class="font-medium w-30rem" style="font-size: 16px; text-align: left;">Senha</label>
+                <label for="password" class="font-medium w-30rem" style="font-size: 16px; text-align: left; color:white;">Senha</label>
                 <input pInputText  [(ngModel)]="logins.password" id="password" class="w-30rem" style="border-radius: 4px;" type="password">
                 <div class="flex-column w-30rem mt-5">
                     <p class="error-message" *ngIf="messageError">
@@ -18,5 +17,6 @@
                 </div>
             </div>
         </div>
+        <div class="field col-6 md:col-6"></div>
     </div>
 </div>
