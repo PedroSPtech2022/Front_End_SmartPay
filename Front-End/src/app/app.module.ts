@@ -37,6 +37,8 @@ import { CalendarModule } from "primeng/calendar";
 import { InfoCenterCostComponent } from "./components/control-center-cost/info-center-cost/info-center-cost.component";
 import { KnobModule } from 'primeng/knob';
 import { MeterGroupModule } from 'primeng/metergroup';
+import { FileUploadModule } from 'primeng/fileupload';
+import { ToastModule } from 'primeng/toast';
 
 @NgModule({
     declarations:[
@@ -81,7 +83,9 @@ import { MeterGroupModule } from 'primeng/metergroup';
         CalendarModule,
         KnobModule,
         MeterGroupModule,
-        InputNumberModule
+        InputNumberModule,
+        FileUploadModule,
+        ToastModule
     ],
     providers:[],
     bootstrap:[AppComponent]

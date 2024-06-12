@@ -20,11 +20,14 @@
                         </tr>
                     </ng-template>
         
-                <ng-template pTemplate="body" let-Cost>
+                <ng-template pTemplate="body" let-cost>
                     <tr>
                         <td>{{cost.obs}}</td>
                         <td>{{cost.date}}</td>
-                        <td>{{cost.approval}}</td>
+                        <td>
+                            <span *ngIf="cost.approval === false">Não aprovado</span>
+                            <span *ngIf="cost.approval === true">Aprovado</span>
+                        </td>
                         <td><p-button icon="pi pi-info" [rounded]="true" severity="info"  (onClick)="openModal(cost)" /></td>
                     </tr>
                 </ng-template>
@@ -59,6 +62,8 @@
             <div class="p-fluid p-formgrid grid" style="margin-top: 5px;">
                 <div class="field col-6 md:col-6" style="margin-bottom: 0;">
                     <label for="category">Categoria:</label>
+                     <!-- <p-dropdown appendTo="body" class="block w-full" [options]="methodsPay" [(ngModel)]="nMethodsPay" placeholder="Selecione um metodo de pagamento:" optionLabel="label" optionValue="value" (onChange)="postSelected($event)">
+                    </p-dropdown> -->
                     <input pInputText [(ngModel)]="cost.category" type="text" id="value">
 
                 </div>
@@ -72,8 +77,11 @@
         
             <p class="line-height-3 m-0" style="margin-top: 5px;">Data:</p>
             <div class="p-fluid p-formgrid grid">
-                <div class="field col-12 md:col-12" style="margin-bottom: 0;">
+                <div class="field col-6 md:col-6" style="margin-bottom: 0;">
                     <p-calendar id="date" [(ngModel)]="cost.date" dateFormat="dd.mm.yy" [showIcon]="true" [showOnFocus]="false"/>
+                </div>
+                <div class="field col-6 md:col-6" style="margin-bottom: 0;">
+                    <p-fileUpload mode="basic" chooseLabel="Upload Pdf" chooseIcon="pi pi-upload" accept=".pdf" type="file" (change)="fileUploadPDF($event)"/>    
                 </div>
             </div>
 
@@ -83,18 +91,32 @@
                     <textarea [(ngModel)]="cost.describe" rows="5" cols="73" pInputTextarea id="describe"></textarea>
                 </div>
             </div>
-
+            <div class="flex align-items-center">
+                <p class="error-message" *ngIf="messageError">
+                    <i class="pi pi-exclamation-circle" style="margin-right: 5px; color: red;"></i>
+                    {{messageError}}
+                </p>
+            </div>
+            
+            <div class="flex align-items-center">
+                <p class="sucess-message" *ngIf="sucessMessage">
+                    {{sucessMessage}}<i class="pi pi-check" style="margin-right: 5px; color: green;"></i>
+                </p>
+            </div>
             <div class="p-fluid p-formgrid grid" style="margin-top: 5px;">
                 <div class="field col-12 md:col-12" style="margin-bottom: 0;">
                     <p-button label="Finalizar Cadastro" (click)="registryCost()" />
                 </div>
-            </div>
+            </div>  
 </p-dialog>
 
 <p-dialog [(visible)]="displayInfo" [modal]="true" showEffect="fade" [style]="{width: '32vw'}" [breakpoints]="{'330x':'30vw'}">
     <h4>Informações Adicionais</h4>
-    <p>Valor: {{cost.value}}</p>
-    <p>Descrição: {{cost.describe}}</p>
-    <p>Observações: {{cost.obs}}</p>
-    <p>Metodo de Pagamento: {{cost.payment_method}}</p>
+    <span style="font-weight:bold;">Valor:</span><span> {{cost.value}}</span>
+    <br>
+    <span style="font-weight:bold;">Descrição:</span><span> {{cost.describe}}</span> 
+    <br>
+    <span style="font-weight:bold;"> Observações:</span><span> {{cost.obs}}</span>
+    <br>
+    <span style="font-weight:bold;">Metodo de Pagamento: </span><span> {{cost.payment_method}}</span>
 </p-dialog>

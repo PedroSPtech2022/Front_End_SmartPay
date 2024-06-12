@@ -4,6 +4,11 @@ import { Router } from '@angular/router';
 import { Table } from 'primeng/table';
 import { EmployeeVisionService } from '../../../services/employee-vision.service';
 
+
+interface UploadEvent {
+    originalEvent: Event;
+    files: File[];
+}
 @Component({
   selector: 'app-employee-list-variable-cost',
   templateUrl: './employee-list-variable-cost.component.html',
@@ -50,8 +55,34 @@ export class EmployeeListVariableCostComponent {
     }
 
     ngOnInit(){
-        // this.getCosts();
+        this.getCosts();
     }
+
+    // fileUploadPDF(event:any) {
+    //     // let targetEvent = event.target;
+    //     // let file:File = targetEvent.files[0];
+    //     // let fileReader:FileReader = new FileReader();
+    //     // fileReader.onload = (e)=>{
+    //     //     this.arqBase64 = this.arq
+    //     // }
+        
+    // }
+
+    fileUploadPDF(event:any) {
+        const file: File = event.target.files[0];
+        this.uploadFile(file);
+    }
+
+      uploadFile(file:File) {
+        this.employeeVisionService.uploadFile(file).subscribe(
+          data => {
+            console.log(data);
+          },
+          error => {
+            console.error(error);
+          }
+        );
+      }
 
     onGlobalFilter(table:Table, event: Event){
         table.filterGlobal((event.target as HTMLInputElement).value,'contains')
@@ -90,22 +121,22 @@ export class EmployeeListVariableCostComponent {
             if(res.status == 201){
                 this.sucessMessage = "Custo registrado";
                 setTimeout(() => {
-                    this.sucessMessage = ""; // Limpa a mensagem após 5 segundos
-                    //window.location.reload(); // Recarrega a página
+                    this.sucessMessage = ""; 
+                    window.location.reload(); 
                 }, 5000);
             } else{
                 this.messageError = "Erro ao tentar cadastrar custo";
                 setTimeout(() => {
-                    this.messageError = ""; // Limpa a mensagem após 5 segundos
-                    //window.location.reload(); // Recarrega a página
+                    this.messageError = ""; 
+                    //window.location.reload(); 
                 }, 2000);
             }
            },
            (error)=>{
              this.messageError = "Erro ao cadastrar custo";
              setTimeout(() => {
-                this.messageError = ""; // Limpa a mensagem após 5 segundos
-                //window.location.reload(); // Recarrega a página
+                this.messageError = ""; 
+                //window.location.reload(); 
             }, 2000);
              this.isLoading = false;
              console.error(error);
