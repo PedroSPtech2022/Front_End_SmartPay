@@ -16,9 +16,9 @@ export class ListEmployeeService {
 
   constructor(private http:HttpClient) { }
 
-  private getToken(){
-      const token = localStorage.getItem("token");
-      return token ? token.toString():"";
+  private getNumberCenterCost(){
+      const numberCenterCost = sessionStorage.getItem("id_cost_center");
+      return numberCenterCost ? numberCenterCost.toString():"";
   }
 
   private getHeaders(): HttpHeaders{
@@ -34,7 +34,7 @@ export class ListEmployeeService {
   }
 
   getEmployee(){ 
-      let url = this.apiUrl + '/employees/by-cost-center/1';
+      let url = this.apiUrl + '/employees/by-cost-center/'+ this.getNumberCenterCost();
       const headers = this.getHeaders();
 
       return this.http.get<Employee[]>(url, { headers }).toPromise().then(res => res as any);

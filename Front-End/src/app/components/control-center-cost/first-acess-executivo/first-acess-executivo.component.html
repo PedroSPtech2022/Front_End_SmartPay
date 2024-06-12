@@ -104,7 +104,19 @@
                                 </ng-template>
                                 <ng-template pTemplate="content" let-prevCallback="prevCallback" let-nextCallback="nextCallback">
                                     <div class="flex flex-column gap-2 mx-auto" style="min-height: 16rem; max-width: 24rem">
+                                        <div class="text-center mt-3 mb-3 text-xl font-semibold">Aguardando...</div>
+                                        <div class="text-center">
+                                            <i class="pi pi-spin pi-spinner" style="font-size: 4rem"></i>
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-column gap-2 mx-auto" style="min-height: 16rem; max-width: 24rem" *ngIf="AccountSucess">
                                         <div class="text-center mt-3 mb-3 text-xl font-semibold">Conta Criada com Sucesso</div>
+                                        <div class="text-center">
+                                            <img alt="logo" src="https://primefaces.org/cdn/primeng/images/stepper/content.svg" />
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-column gap-2 mx-auto" style="min-height: 16rem; max-width: 24rem" *ngIf="AccountError">
+                                        <div class="text-center mt-3 mb-3 text-xl font-semibold">Erro ao criar a conta</div>
                                         <div class="text-center">
                                             <img alt="logo" src="https://primefaces.org/cdn/primeng/images/stepper/content.svg" />
                                         </div>
@@ -112,10 +124,6 @@
                                     <div class="flex pt-4 justify-content-between">
                                         <p-button (onClick)="prevCallback.emit()" label="Voltar" severity="secondary" icon="pi pi-arrow-left" />
                                         <p-button (onClick)="finishRegistry()" label="Finalizar Cadastro" icon="pi pi-check" iconPos="right" />
-                                        <p class="error-message" *ngIf="messageError">
-                                            <i class="pi pi-exclamation-circle" style="margin-right: 5px; color: red;"></i>
-                                            {{messageError}}
-                                        </p>
                                     </div>
                                 </ng-template>
                             </p-stepperPanel>

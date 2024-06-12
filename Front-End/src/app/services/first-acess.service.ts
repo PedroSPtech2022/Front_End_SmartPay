@@ -22,6 +22,11 @@ export class FirstAcessService {
       })
   }
 
+  private getNumberCenterCost(){
+    const numberCenterCost = sessionStorage.getItem("id_cost_center");
+    return numberCenterCost ? numberCenterCost.toString():"";
+}
+
   registryUser(acess_first:First_Acess): Promise<any>{
     const end_point = this.apiUrl + 'register';
     const headers = this.getHeaders();
@@ -35,7 +40,7 @@ export class FirstAcessService {
   }
 
   registryUserExec(user:User_Exec): Promise<any>{
-    const end_point = this.apiUrl + 'register-executive/' + 1;
+    const end_point = this.apiUrl + 'register-executive/' + this.getNumberCenterCost();
     const headers = this.getHeaders();
     return this.http.post(end_point,user,{ headers: headers, observe: 'response' }).toPromise().then(res => res).catch(error => { console.error('Erro no End-Point',error); throw error});
   }

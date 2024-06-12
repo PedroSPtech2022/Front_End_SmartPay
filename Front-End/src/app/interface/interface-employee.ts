@@ -4,7 +4,7 @@ export interface Employee {
   job_title?: string,
   salary?: number,
   position?: string,
-  fk_cost_center?: number
+  fk_cost_center?: number | null 
 }
 
 export interface EmployeeUser {

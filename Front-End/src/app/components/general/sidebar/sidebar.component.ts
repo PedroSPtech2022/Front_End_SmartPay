@@ -66,7 +66,7 @@ export class SidebarComponent {
             {
             label:'Informações de Centro de Custos',
             icon:'pi pi-exclamation-circle',
-            url: 'executivo/info-center-cost'
+            url: '/executivo/info-center-cost'
           },],          
         },
         {
@@ -127,6 +127,7 @@ export class SidebarComponent {
       sessionStorage.removeItem('type_user');
       sessionStorage.removeItem('email');
       sessionStorage.removeItem('name');
+      sessionStorage.removeItem('id_cost_center');
       this.router.navigateByUrl('login');
     }
 }

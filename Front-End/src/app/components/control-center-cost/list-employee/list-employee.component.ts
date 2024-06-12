@@ -79,8 +79,8 @@ export class ListEmployeeComponent implements OnInit {
                 this.sucessMessage = "Senha de primeiro acesso para o funcionário:" +  senha;
                 setTimeout(() => {
                     this.sucessMessage = ""; // Limpa a mensagem após 5 segundos
-                    window.location.reload(); // Recarrega a página
-                }, 5000);
+                    // window.location.reload(); // Recarrega a página
+                }, 7000);
             } else{
                 this.messageError = "Erro ao tentar cadastrar acesso";
                 setTimeout(() => {

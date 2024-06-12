@@ -24,8 +24,13 @@ export class EmployeeVisionService {
       })
   }
 
+  private getNumberCenterCost(){
+    const numberCenterCost = sessionStorage.getItem("id_cost_center");
+    return numberCenterCost ? numberCenterCost.toString():"";
+  } 
+
   registryCost(registry_cost: Cost_Variable): Promise<any>{
-    const end_point = this.apiUrl + '/create-variable-cost/1';
+    const end_point = this.apiUrl + '/create-variable-cost/' + this.getNumberCenterCost();
     const headers = this.getHeaders();
     return this.http.post(end_point,registry_cost,{headers, observe: 'response'}).toPromise().then(res => res).catch(error => { console.error('Erro no End-Point',error); throw error});
   }
@@ -34,7 +39,7 @@ export class EmployeeVisionService {
     let url = `${this.apiUrl}/list`;
     const headers = this.getHeaders();
 
-    return this.http.get<Employee[]>(url, { headers }).toPromise().then(res => res as any).then(data => {return data;})
+    return this.http.get<Cost_Variable[]>(url, { headers }).toPromise().then(res => res as any).then(data => {return data;})
 }
 
 }

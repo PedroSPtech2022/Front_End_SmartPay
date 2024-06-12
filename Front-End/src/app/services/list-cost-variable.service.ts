@@ -24,12 +24,17 @@ export class ListCostVariableService {
       })
   }
 
+  private getNumberCenterCost(){
+    const numberCenterCost = sessionStorage.getItem("id_cost_center");
+    return numberCenterCost ? numberCenterCost.toString():"";
+  } 
+
   async updatCostVariableList(){
       this.list = await this.getCostVariableDist();
   }
 
   getCostVariable(){ 
-      let url = this.apiUrl + '/variable-cost/by-cost-center/1';
+      let url = this.apiUrl + '/variable-cost/by-cost-center/' + this.getNumberCenterCost();
       const headers = this.getHeaders();
 
       return this.http.get<Cost_Variable[]>(url, { headers }).toPromise().then(res => res as any);
@@ -57,7 +62,7 @@ export class ListCostVariableService {
       "variable_type": costVariable.type_variable,
       "date": costVariable.date,
       "responsible": costVariable.responsible,
-      "approved": false
+      "approved": true
     }
     return this.http.patch(end_point,patchCostC,{headers, observe: 'response'}).toPromise().then(res => res).catch(error => { console.error('Erro no End-Point',error); throw error});
   }

@@ -25,7 +25,7 @@
                         <td>{{cost.obs}}</td>
                         <td>{{cost.date}}</td>
                         <td>{{cost.approval}}</td>
-                        <td><p-button icon="pi pi-info" [rounded]="true" severity="info" [outlined]="true" (onClick)="openModal(cost)" /></td>
+                        <td><p-button icon="pi pi-info" [rounded]="true" severity="info"  (onClick)="openModal(cost)" /></td>
                     </tr>
                 </ng-template>
             </p-table>
@@ -45,7 +45,7 @@
             <p class="line-height-3 m-0" style="margin-top: 5px;">Valor:</p>
             <div class="p-fluid p-formgrid grid">
                 <div class="field col-12 md:col-12" style="margin-bottom: 0;">
-                    <input pInputText [(ngModel)]="cost.value" type="text" id="value">
+                    <p-inputNumber [(ngModel)]="cost.value"  inputId="value" [useGrouping]="false" /> 
                 </div>
             </div>
 
@@ -59,8 +59,6 @@
             <div class="p-fluid p-formgrid grid" style="margin-top: 5px;">
                 <div class="field col-6 md:col-6" style="margin-bottom: 0;">
                     <label for="category">Categoria:</label>
-                    <!-- <p-dropdown appendTo="body" class="block w-full" [options]="categorys" [(ngModel)]="nCategorys" placeholder="Selecione uma categoria:" optionLabel="label" optionValue="value" (onChange)="postSelected($event)">
-                    </p-dropdown> -->
                     <input pInputText [(ngModel)]="cost.category" type="text" id="value">
 
                 </div>
@@ -82,7 +80,7 @@
             <p class="line-height-3 m-0" style="margin-top: 5px;">Descrição:</p>
             <div class="p-fluid p-formgrid grid " >
                 <div class="field col-12 md:col-12" style="margin-bottom: 0;">
-                    <textarea [(ngModel)]="cost.describe" rows="5" cols="70" pInputTextarea id="describe"></textarea>
+                    <textarea [(ngModel)]="cost.describe" rows="5" cols="73" pInputTextarea id="describe"></textarea>
                 </div>
             </div>
 

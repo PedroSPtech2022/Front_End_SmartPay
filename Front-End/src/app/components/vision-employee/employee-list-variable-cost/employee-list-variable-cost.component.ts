@@ -75,11 +75,17 @@ export class EmployeeListVariableCostComponent {
     }
 
     registryCost(){
-        this.cost.value = 2000
+        // this.cost.value = 2000
         this.cost.date = "2024-06-13"
         this.cost.approval = false;   
-        this.cost.responsible = "Ezequiel";
+        this.cost.responsible = "Ezequiel Leandro";
 
+        var responsible = sessionStorage.getItem('name');
+        if (responsible !== null) {
+        this.cost.responsible = responsible
+        } else {
+          console.error("A chave 'id_cost_center' não existe no armazenamento de sessão.");
+        }
         this.employeeVisionService.registryCost(this.cost).then(res =>{
             if(res.status == 201){
                 this.sucessMessage = "Custo registrado";

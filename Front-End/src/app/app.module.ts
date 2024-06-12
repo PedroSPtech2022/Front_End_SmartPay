@@ -80,7 +80,8 @@ import { MeterGroupModule } from 'primeng/metergroup';
         PanelModule,
         CalendarModule,
         KnobModule,
-        MeterGroupModule
+        MeterGroupModule,
+        InputNumberModule
     ],
     providers:[],
     bootstrap:[AppComponent]

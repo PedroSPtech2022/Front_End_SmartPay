@@ -22,10 +22,14 @@ export class InfoCenterCostService {
       })
   }
 
-    getCostVariable(){ 
-        let url = this.apiUrl + '/cost-center/1';
-        const headers = this.getHeaders();
+  private getNumberCenterCost(){
+    const numberCenterCost = sessionStorage.getItem("id_cost_center");
+    return numberCenterCost ? numberCenterCost.toString():"";
+  }
 
+    getCenterCost(){ 
+        let url = this.apiUrl + '/cost-center/' + this.getNumberCenterCost();
+        const headers = this.getHeaders();
         return this.http.get<Center_Cost>(url, { headers }).toPromise().then(res => res as any);
     }
 

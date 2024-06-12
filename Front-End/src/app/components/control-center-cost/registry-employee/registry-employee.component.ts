@@ -16,7 +16,18 @@ export class RegistryEmployeeComponent {
   constructor(private router: Router, private registryEmployeeService: RegistryEmployeeService){}
 
   finishRegistry(){
-    this.employee.fk_cost_center = 12
+    
+    var id_cost_centers_str = sessionStorage.getItem('id_cost_center');
+    if (id_cost_centers_str !== null) {
+      var id_cost_centers_int = parseInt(id_cost_centers_str, 10);
+      if (!isNaN(id_cost_centers_int)) {
+        this.employee.fk_cost_center = id_cost_centers_int
+      } else {
+          console.error("Não foi possível converter o valor para um número inteiro.");
+      }
+        } else {
+          console.error("A chave 'id_cost_center' não existe no armazenamento de sessão.");
+    }
     this.employee.salary = 20000
     console.log(this.employee)
     this.registryEmployeeService.registryEmployees(this.employee).then(res =>{

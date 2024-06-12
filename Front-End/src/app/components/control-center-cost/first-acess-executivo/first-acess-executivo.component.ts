@@ -21,6 +21,8 @@ export class FirstAcessExecutivoComponent implements OnInit{
   producao: any[] | undefined;
 
   messageError = "";
+  AccountSucess: boolean = false;
+  AccountError: boolean = false;
   isLoading = false;
 
   selectedTypeProducao: any = {};
@@ -79,11 +81,17 @@ export class FirstAcessExecutivoComponent implements OnInit{
 
      this.firstAcessService.registryUserExec(this.exec_user).then(res =>{
       if(res.status == 201){
-        this.statusRegistryUserExec = true;
-        this.router.navigateByUrl('login');
+        this.AccountSucess = true;
+        setTimeout(() => {
+          this.AccountSucess = false; // Limpa a mensagem após 5 segundos
+          this.router.navigateByUrl('login'); // Recarrega a página
+      }, 2000);
+      } else{
+        this.AccountError = true;
       }
      },
      (error)=>{
+       this.AccountError = true;
        this.messageError = "Erro ao tentar logar";
        this.isLoading = false;
        console.error(error);
