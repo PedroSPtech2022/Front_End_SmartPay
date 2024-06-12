@@ -48,7 +48,7 @@ export class LoginComponent implements OnInit{
           this.router.navigateByUrl('executivo/list-employee');
         }else if(this.logins_res.type_user === 'FUNC'){
           this.saveSession(this.logins_res.name,this.logins_res.type_user,this.logins_res.email,this.logins_res.token,this.logins_res.id_executive,this.logins_res.id_cost_center);
-          this.router.navigateByUrl('executivo/list-variable-cost');
+          this.router.navigateByUrl('employee/list-cost-variable');
         } else {
           this.messageError = 'Erro ao tentar Logar';
           this.isLoading = false; 

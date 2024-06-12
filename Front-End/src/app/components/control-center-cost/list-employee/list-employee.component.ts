@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Employee, EmployeeUser } from '../../../interface/interface-employee';
-import { ListUserService } from '../../../services/list-user.service';
+import { ListEmployeeService } from '../../../services/list-employee.service';
 import { Table } from 'primeng/table';
 import { HttpResponse } from '@angular/common/http';
+import { timeInterval } from 'rxjs';
 
 @Component({
   selector: 'app-list-employee',
@@ -15,6 +16,10 @@ export class ListEmployeeComponent implements OnInit {
     display: boolean = false;
     displayRegisterUser: boolean = false;
 
+    isLoading: boolean = false;
+    messageError = "";
+    sucessMessage = "";
+
     employees: Employee[]=[];
     employee: Employee = {};
     employeeUser: EmployeeUser = {};
@@ -22,7 +27,7 @@ export class ListEmployeeComponent implements OnInit {
     nStats: any;
     types_user: any[];
 
-    constructor(private router: Router, private listEmployeeService:ListUserService){
+    constructor(private router: Router, private listEmployeeService:ListEmployeeService){
         this.stats = [
             {label:'Desativar',value:'desativar'},
             {label:'Ativar',value:'ativar'}
@@ -40,8 +45,6 @@ export class ListEmployeeComponent implements OnInit {
     typeUserRegister(event:any){
         this.types_user = [];
         const type_user = event.value;
-        this.employeeUser.type_user = type_user;
-
     }
 
     onGlobalFilter(table:Table, event: Event){
@@ -67,18 +70,34 @@ export class ListEmployeeComponent implements OnInit {
     }
 
     callRegistryUser(){
-        const employeeUser = this.employeeUser
-        this.listEmployeeService.registryUser(employeeUser).subscribe(response =>{
-            if(response.status == 201){
-                this.displayRegisterUser = false;
-            }else{
-                console.log("registro falhou")
+        this.employeeUser.name =  this.employee.name
+        this.employeeUser.email =  this.employee.email
+        console.log(this.employeeUser)
+        this.listEmployeeService.registryUser(this.employeeUser).then(res =>{
+            if(res.status == 201){
+                const senha = res.body.password_employee
+                this.sucessMessage = "Senha de primeiro acesso para o funcionário:" +  senha;
+                setTimeout(() => {
+                    this.sucessMessage = ""; // Limpa a mensagem após 5 segundos
+                    window.location.reload(); // Recarrega a página
+                }, 5000);
+            } else{
+                this.messageError = "Erro ao tentar cadastrar acesso";
+                setTimeout(() => {
+                    this.messageError = ""; // Limpa a mensagem após 5 segundos
+                    window.location.reload(); // Recarrega a página
+                }, 2000);
             }
-        }, error =>{
-            console.log(error)
-        }
-    ) 
+           },
+           (error)=>{
+             this.messageError = "Erro ao cadastrar acesso";
+             setTimeout(() => {
+                this.messageError = ""; // Limpa a mensagem após 5 segundos
+                window.location.reload(); // Recarrega a página
+            }, 2000);
+             this.isLoading = false;
+             console.error(error);
+           });
     }
-
 
 }

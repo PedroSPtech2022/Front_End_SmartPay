@@ -12,9 +12,10 @@
             <tr>
                 <th pSortableColumn="name" class="white-space-nowrap" style="width: 15%;">Tipo<p-sortIcon field="type_variable"></p-sortIcon></th>
                 <th pSortableColumn="date" class="white-space-nowrap" style="width: 15%;">Data<p-sortIcon field="date"></p-sortIcon></th>
-                <th pSortableColumn="responsible" class="white-space-nowrap" style="width: 15%;">Responsavel<p-sortIcon field="responsible"></p-sortIcon></th>
+                <th pSortableColumn="responsible" class="white-space-nowrap" style="width: 15%;">Responsável<p-sortIcon field="responsible"></p-sortIcon></th>
                 <th pSortableColumn="approval" class="white-space-nowrap" style="width: 15%;">Situação<p-sortIcon field="approval"></p-sortIcon></th>
-                <th pSortableColumn="approval" class="white-space-nowrap" style="width: 15%;">Mais Informações</th>
+                <th class="white-space-nowrap" style="width: 2%;"></th>
+                <th class="white-space-nowrap" style="width: 2%;"></th>
             </tr>
         </ng-template>
 
@@ -24,26 +25,50 @@
                 <td>{{cost.date}}</td>
                 <td>{{cost.responsible}}</td>
                 <td>{{cost.approval}}</td>
-                <td><p-button icon="pi pi-info" [rounded]="true" severity="info" [outlined]="true" (onClick)="openModal(cost)" /></td>
+                <td><p-button icon="pi pi-pencil" [rounded]="true" severity="danger" [outlined]="true" (onClick)="openModal(cost)" /></td>
+                <td><p-button icon="pi pi-info" [rounded]="true" severity="info" [outlined]="true" (click)="openModalInfo(cost)"></p-button></td>
             </tr>
         </ng-template>
     </p-table>
 </div>
 </p-card>
-<!-- <p-dialog [(visible)]="display" [modal]="true" showEffect="fade" [style]="{width: '30vw'}" [breakpoints]="{'960px':'73vw'}">
-    <h5>Usuário: {{user.name}}</h5>
 
-    <p class="line-height-3 m-0">Situação</p>
+<p-dialog [(visible)]="display" [modal]="true" showEffect="fade" [style]="{width: '30vw'}" [breakpoints]="{'960px':'73vw'}">
+    <h5>Funcionário: {{cost.responsible}}</h5>
 
-    <div class="p-fluid p-formgrid grid">
+    <p class="line-height-3 m-0">Aprovar ou Reprovar</p>
+
+    <div class="p-fluid p-formgrid grid" style="margin-top: 2px;">
         <div class="field col-12 md:col-12" style="margin-bottom: 0;">
             <p-dropdown appendTo="body" class="block w-full" [options]="stats" [(ngModel)]="nStats" placeholder="Selecione um status:" optionLabel="label" optionValue="value" (onChange)="postSelected($event)">
             </p-dropdown>
         </div>
     </div>
 
-    <ng-template p-Template="footer">
-        <button pButton style="color: brown;" (click)="display=false" label="Voltar" class="p-button-outlined"></button>
-        <button pButton style="color: #fff; background-color: cadetblue;" (click)="callUpdateUser()" label="Salvar" class="p-button-outlined"></button>
-    </ng-template>
-</p-dialog> -->
+    <div class="flex align-items-center">
+        <p class="sucess-message" *ngIf="sucessMessage">
+            {{sucessMessage}}    <i class="pi pi-check" style="margin-right: 5px; color: green;"></i>
+        </p>
+    </div>
+    <div class="flex align-items-center">
+        <p class="error-message" *ngIf="messageError">
+            <i class="pi pi-exclamation-circle" style="margin-right: 5px; color: red;"></i>
+            {{messageError}}
+        </p>
+    </div>
+    <div style="margin-top:15px; display: flex;">
+        <button pButton style="color: red;" (click)="display=false" label="Voltar" class="p-button-outlined"></button>
+        <button pButton style="margin-left: 10px;" (click)="callUpdateCost()" label="Salvar" class="p-button-outlined"></button>
+    </div>
+
+</p-dialog>
+
+<p-dialog [(visible)]="displayInfo" [modal]="true" showEffect="fade" [style]="{width: '30vw'}" [breakpoints]="{'960px':'73vw'}">
+    <h4>Funcionário: {{cost.responsible}}</h4>
+        <p class="line-height-3 m-0">Custo: {{cost.type_variable}}</p>
+        <p class="line-height-3 m-0">Categoria: {{cost.category}}</p>
+        <p class="line-height-3 m-0">Data: {{cost.date}}</p>
+        <p class="line-height-3 m-0">Observação: {{cost.obs}}</p>
+        <p class="line-height-3 m-0">Descrição: {{cost.describe}}</p>
+        <p class="line-height-3 m-0">Metodo de pagamento: {{cost.payment_method}}</p>
+</p-dialog>

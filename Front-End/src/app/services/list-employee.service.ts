@@ -8,9 +8,9 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 
-export class ListUserService {
+export class ListEmployeeService {
 
-  private apiUrl = `${enviroment.apiUrl}/v1/employees/by-cost-center/1`
+  private apiUrl = `${enviroment.apiUrl}/v1`
 
   list: Employee[] = [];
 
@@ -34,7 +34,7 @@ export class ListUserService {
   }
 
   getEmployee(){ 
-      let url = this.apiUrl;
+      let url = this.apiUrl + '/employees/by-cost-center/1';
       const headers = this.getHeaders();
 
       return this.http.get<Employee[]>(url, { headers }).toPromise().then(res => res as any);
@@ -50,8 +50,9 @@ export class ListUserService {
       return this.list
   }
 
-  registryUser(employeeUser:EmployeeUser): Observable<HttpResponse<any>>{
+  registryUser(employeeUser:EmployeeUser):Promise<any>{
+    const end_point = this.apiUrl + '/create-user';
     const headers = this.getHeaders();
-    return this.http.post(this.apiUrl,employeeUser,{headers, observe: 'response'});
+    return this.http.post(end_point,employeeUser,{headers, observe: 'response'}).toPromise().then(res => res).catch(error => { console.error('Erro no End-Point',error); throw error});
   }
 }

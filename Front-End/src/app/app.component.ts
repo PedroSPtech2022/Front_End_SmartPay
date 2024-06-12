@@ -8,7 +8,7 @@ import { LoginService } from './services/login-service';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'front_end';
+  title = 'SmartPay';
 
   isTelaLogin:boolean = true;
   isTelaFirstAcess:boolean = false;

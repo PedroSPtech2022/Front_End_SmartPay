@@ -18,14 +18,16 @@ export class EmployeeVisionService {
 
   private getHeaders(): HttpHeaders{
       return new HttpHeaders({
-          'Content-Type':'application/json'
+        'Access-Control-Allow-Origin':'*',
+        'Content-Type':'application/json',
+        'authorization': 'authorization' 
       })
   }
 
-  registryCost(registry_cost: Cost_Variable): Observable<HttpResponse<any>>{
-    const end_point = this.apiUrl + 'employees';
+  registryCost(registry_cost: Cost_Variable): Promise<any>{
+    const end_point = this.apiUrl + '/create-variable-cost/1';
     const headers = this.getHeaders();
-    return this.http.post(end_point,registry_cost,{headers, observe: 'response'});
+    return this.http.post(end_point,registry_cost,{headers, observe: 'response'}).toPromise().then(res => res).catch(error => { console.error('Erro no End-Point',error); throw error});
   }
 
   getCostEmployee(){ 

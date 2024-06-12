@@ -9,7 +9,5 @@ export interface Employee {
 
 export interface EmployeeUser {
   name?: string,
-  email?: string,
-  password?: string,
-  type_user?: string
+  email?: string
 }

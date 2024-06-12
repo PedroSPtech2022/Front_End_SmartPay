@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient,HttpHeaders,HttpResponse } from "@angular/common/http";
-import { Employee, EmployeeUser } from '../interface/interface-employee';
 import { enviroment } from '../enviroments/enviroment';
 import { Observable } from 'rxjs';
 import { Cost_Variable } from '../interface/interface-cost-variable';
@@ -9,9 +8,9 @@ import { Cost_Variable } from '../interface/interface-cost-variable';
   providedIn: 'root'
 })
 
-export class ListUserService {
+export class ListCostVariableService {
 
-  private apiUrl = `${enviroment.apiUrl}/v1/variable-cost/by-cost-center/1`
+  private apiUrl = `${enviroment.apiUrl}/v1`
 
   list: Cost_Variable[] = [];
 
@@ -30,7 +29,7 @@ export class ListUserService {
   }
 
   getCostVariable(){ 
-      let url = this.apiUrl;
+      let url = this.apiUrl + '/variable-cost/by-cost-center/1';
       const headers = this.getHeaders();
 
       return this.http.get<Cost_Variable[]>(url, { headers }).toPromise().then(res => res as any);
@@ -46,8 +45,20 @@ export class ListUserService {
       return this.list
   }
 
-  registryUser(costVariable:Cost_Variable): Observable<HttpResponse<any>>{
+  registryUser(costVariable:Cost_Variable):Promise<any>{
     const headers = this.getHeaders();
-    return this.http.post(this.apiUrl,costVariable,{headers, observe: 'response'});
+    return this.http.post(this.apiUrl,costVariable,{headers, observe: 'response'}).toPromise().then(res => res).catch(error => { console.error('Erro no End-Point',error); throw error});
+  }
+
+  patchCost(costVariable:Cost_Variable):Promise<any>{
+    const headers = this.getHeaders();
+    const end_point = this.apiUrl + '/variable-cost';
+    const patchCostC = {
+      "variable_type": costVariable.type_variable,
+      "date": costVariable.date,
+      "responsible": costVariable.responsible,
+      "approved": false
+    }
+    return this.http.patch(end_point,patchCostC,{headers, observe: 'response'}).toPromise().then(res => res).catch(error => { console.error('Erro no End-Point',error); throw error});
   }
 }

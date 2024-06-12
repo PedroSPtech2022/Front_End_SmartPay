@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Cost_Variable } from '../../../interface/interface-cost-variable';
 import { Router } from '@angular/router';
-import { ListUserService } from '../../../services/list-user.service';
 import { Table } from 'primeng/table';
 import { EmployeeVisionService } from '../../../services/employee-vision.service';
 
@@ -17,6 +16,10 @@ export class EmployeeListVariableCostComponent {
 
     costs: Cost_Variable[] = [];
     cost: Cost_Variable = {};
+
+    isLoading: boolean = false;
+    messageError = "";
+    sucessMessage = "";
 
     stats: any[];
     nStats:any;
@@ -72,17 +75,35 @@ export class EmployeeListVariableCostComponent {
     }
 
     registryCost(){
-        this.cost.type_variable =""
-        this.cost.describe =""
-        this.cost.value =200
-        this.cost.date = ""
-        this.cost.responsible =""
-        this.cost.category =""
-        this.cost.payment_method =""
-        this.cost.obs =""
+        this.cost.value = 2000
+        this.cost.date = "2024-06-13"
         this.cost.approval = false;   
+        this.cost.responsible = "Ezequiel";
 
-        this.employeeVisionService.registryCost(this.cost)
+        this.employeeVisionService.registryCost(this.cost).then(res =>{
+            if(res.status == 201){
+                this.sucessMessage = "Custo registrado";
+                setTimeout(() => {
+                    this.sucessMessage = ""; // Limpa a mensagem após 5 segundos
+                    //window.location.reload(); // Recarrega a página
+                }, 5000);
+            } else{
+                this.messageError = "Erro ao tentar cadastrar custo";
+                setTimeout(() => {
+                    this.messageError = ""; // Limpa a mensagem após 5 segundos
+                    //window.location.reload(); // Recarrega a página
+                }, 2000);
+            }
+           },
+           (error)=>{
+             this.messageError = "Erro ao cadastrar custo";
+             setTimeout(() => {
+                this.messageError = ""; // Limpa a mensagem após 5 segundos
+                //window.location.reload(); // Recarrega a página
+            }, 2000);
+             this.isLoading = false;
+             console.error(error);
+           });
     }
 
 }

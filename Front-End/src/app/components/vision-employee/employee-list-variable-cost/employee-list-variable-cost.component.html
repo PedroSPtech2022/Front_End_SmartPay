@@ -38,41 +38,51 @@
             <p class="line-height-3 m-0" style="margin-top: 5px;">Custo:</p>
             <div class="p-fluid p-formgrid grid">
                 <div class="field col-12 md:col-12" style="margin-bottom: 0;">
-                    <input pInputText type="text" id="obs">
+                    <input pInputText [(ngModel)]="cost.obs" type="text" id="obs">
                 </div>
             </div>
 
             <p class="line-height-3 m-0" style="margin-top: 5px;">Valor:</p>
             <div class="p-fluid p-formgrid grid">
                 <div class="field col-12 md:col-12" style="margin-bottom: 0;">
-                    <input pInputText type="text" id="value">
+                    <input pInputText [(ngModel)]="cost.value" type="text" id="value">
+                </div>
+            </div>
+
+            <p class="line-height-3 m-0" style="margin-top: 5px;">Tipo de Custo:</p>
+            <div class="p-fluid p-formgrid grid">
+                <div class="field col-12 md:col-12" style="margin-bottom: 0;">
+                    <input pInputText [(ngModel)]="cost.type_variable" type="text" id="value">
                 </div>
             </div>
 
             <div class="p-fluid p-formgrid grid" style="margin-top: 5px;">
                 <div class="field col-6 md:col-6" style="margin-bottom: 0;">
                     <label for="category">Categoria:</label>
-                    <p-dropdown appendTo="body" class="block w-full" [options]="categorys" [(ngModel)]="nCategorys" placeholder="Selecione uma categoria:" optionLabel="label" optionValue="value" (onChange)="postSelected($event)">
-                    </p-dropdown>
+                    <!-- <p-dropdown appendTo="body" class="block w-full" [options]="categorys" [(ngModel)]="nCategorys" placeholder="Selecione uma categoria:" optionLabel="label" optionValue="value" (onChange)="postSelected($event)">
+                    </p-dropdown> -->
+                    <input pInputText [(ngModel)]="cost.category" type="text" id="value">
+
                 </div>
                 <div class="field col-6 md:col-6" style="margin-bottom: 0;">
                     <label for="methods_payment">Metodo de Pagamento:</label>
-                    <p-dropdown appendTo="body" class="block w-full" [options]="methodsPay" [(ngModel)]="nMethodsPay" placeholder="Selecione um metodo de pagamento:" optionLabel="label" optionValue="value" (onChange)="postSelected($event)">
-                    </p-dropdown>
+                    <!-- <p-dropdown appendTo="body" class="block w-full" [options]="methodsPay" [(ngModel)]="nMethodsPay" placeholder="Selecione um metodo de pagamento:" optionLabel="label" optionValue="value" (onChange)="postSelected($event)">
+                    </p-dropdown> -->
+                    <input pInputText [(ngModel)]="cost.payment_method" type="text" id="value">
                 </div>
             </div>
         
             <p class="line-height-3 m-0" style="margin-top: 5px;">Data:</p>
             <div class="p-fluid p-formgrid grid">
                 <div class="field col-12 md:col-12" style="margin-bottom: 0;">
-                    <p-calendar id="date" dateFormat="dd.mm.yy" [showIcon]="true" [showOnFocus]="false"/>
+                    <p-calendar id="date" [(ngModel)]="cost.date" dateFormat="dd.mm.yy" [showIcon]="true" [showOnFocus]="false"/>
                 </div>
             </div>
 
             <p class="line-height-3 m-0" style="margin-top: 5px;">Descrição:</p>
             <div class="p-fluid p-formgrid grid " >
                 <div class="field col-12 md:col-12" style="margin-bottom: 0;">
-                    <textarea rows="5" cols="79" pInputTextarea id="describe"></textarea>
+                    <textarea [(ngModel)]="cost.describe" rows="5" cols="70" pInputTextarea id="describe"></textarea>
                 </div>
             </div>
 

@@ -54,7 +54,7 @@ export class SidebarComponent {
           {
             label:'Controle de acesso',
             icon:'pi pi-users',
-            url:'/executivo/list-user'
+            url:'/executivo/list-employee'
           }],          
         },
         {
@@ -67,6 +67,18 @@ export class SidebarComponent {
             label:'Informações de Centro de Custos',
             icon:'pi pi-exclamation-circle',
             url: 'executivo/info-center-cost'
+          },],          
+        },
+        {
+          separator:true
+        },
+        {
+          label:'Logout',
+          items:[
+            {
+              label:'Logout',
+              icon:'pi pi-sign-out',
+              command: () => this.logout(),
           },],          
         }
       ];
@@ -86,6 +98,18 @@ export class SidebarComponent {
             url: '/employee/list-cost-variable'
             }
           ],          
+        },
+        {
+          separator:true
+        },
+        {
+          label:'Logout',
+          items:[
+            {
+              label:'Logout',
+              icon:'pi pi-sign-out',
+              command: () => this.logout(),
+          },],          
         }
       ];
     }
@@ -97,5 +121,12 @@ export class SidebarComponent {
       } else if(type_user == "FUNC"){
         this.validateUserEmployee();
       }
+    }
+
+    logout(){
+      sessionStorage.removeItem('type_user');
+      sessionStorage.removeItem('email');
+      sessionStorage.removeItem('name');
+      this.router.navigateByUrl('login');
     }
 }

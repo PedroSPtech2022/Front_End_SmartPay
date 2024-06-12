@@ -25,6 +25,7 @@ export class RegistryEmployeeService {
 
   registryEmployees(employee_registry:Employee):Promise<any>{
     const end_point = this.apiUrl + 'employees';
+    employee_registry.fk_cost_center = 1; 
     const headers = this.getHeaders();
     return this.http.post(end_point,employee_registry,{ headers: headers, observe: 'response' }).toPromise().then(res => res).catch(error => { console.error('Erro no End-Point',error); throw error});
   }
