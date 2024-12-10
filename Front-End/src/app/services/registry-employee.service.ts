@@ -11,7 +11,7 @@ import { Employee } from '../interface/interface-employee';
 
 export class RegistryEmployeeService {
 
-  private apiUrl = `${enviroment.apiUrl}/v1/`
+  private apiUrl = `http://54.91.7.234:8080/api/v1/`
 
   constructor(private http:HttpClient) { }
 
@@ -19,7 +19,7 @@ export class RegistryEmployeeService {
       return new HttpHeaders({
           'Content-Type':'application/json',
           'Access-Control-Allow-Origin':'*',
-          'authorization': 'authorization'
+          'Authorization': 'authorization'
       })
   }
 

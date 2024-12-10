@@ -39,6 +39,7 @@ import { KnobModule } from 'primeng/knob';
 import { MeterGroupModule } from 'primeng/metergroup';
 import { FileUploadModule } from 'primeng/fileupload';
 import { ToastModule } from 'primeng/toast';
+import { HomeComponent } from "./components/general/home/home.component";
 
 @NgModule({
     declarations:[
@@ -53,7 +54,7 @@ import { ToastModule } from 'primeng/toast';
         ListVariableCostComponent,
         EmployeeListVariableCostComponent,
         LoginComponent,
-        NotFoundComponent
+        NotFoundComponent,
     ],
     imports:[
         BrowserModule,

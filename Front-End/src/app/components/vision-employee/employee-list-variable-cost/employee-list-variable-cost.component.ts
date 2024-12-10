@@ -19,6 +19,9 @@ export class EmployeeListVariableCostComponent {
     display: boolean = false;
     displayInfo: boolean = false;
 
+    costdt: { date: string | null } = { date: null }; // Armazena no formato "06;09.2024"
+    displayDate: Date | null = null; // Mantém o valor para exibição no calendário
+
     costs: Cost_Variable[] = [];
     cost: Cost_Variable = {};
 
@@ -42,15 +45,16 @@ export class EmployeeListVariableCostComponent {
         ];
 
         this.methodsPay = [
-            {label:'Cartão de credito',value:'credito'},
-            {label:'Cartão de debito',value:'debito'},
-            {label:'PIX',value:'pix'}
+            {label:'Cartão de Credito',value:'Cartao Credito'},
+            {label:'Cartão de Debito',value:'Cartao Debito'},
+            {label:'PIX',value:'Pix'}
         ];
 
         this.categorys = [
-            {label:'Certificação',value:'certificacao'},
-            {label:'Transporte',value:'transporte'},
-            {label:'Outros',value:'outros'}
+            {label:'Capacitação',value:'Capacitacao'},
+            {label:'Transporte',value:'Transporte'},
+            {label:'Reembolso',value:'Reembolso'},
+            {label:'Outros',value:'Outros'}
         ];
     }
 
@@ -65,7 +69,6 @@ export class EmployeeListVariableCostComponent {
     //     // fileReader.onload = (e)=>{
     //     //     this.arqBase64 = this.arq
     //     // }
-        
     // }
 
     fileUploadPDF(event:any) {
@@ -82,6 +85,15 @@ export class EmployeeListVariableCostComponent {
             console.error(error);
           }
         );
+      }
+      onDateSelect(event: Date): void {
+        // Atualiza a data no formato customizado
+        const day = event.getDate().toString().padStart(2, '0');
+        const month = (event.getMonth() + 1).toString().padStart(2, '0');
+        const year = event.getFullYear();
+        this.cost.date = `${year}-${month}-${day}`;
+        // Mantém a data como objeto Date no display para exibição
+        this.displayDate = event;
       }
 
     onGlobalFilter(table:Table, event: Event){
@@ -106,11 +118,8 @@ export class EmployeeListVariableCostComponent {
     }
 
     registryCost(){
-        // this.cost.value = 2000
-        this.cost.date = "2024-06-13"
         this.cost.approval = false;   
-        this.cost.responsible = "Ezequiel Leandro";
-
+        console.log(this.cost.date)
         var responsible = sessionStorage.getItem('name');
         if (responsible !== null) {
         this.cost.responsible = responsible

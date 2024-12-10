@@ -1,29 +1,14 @@
-<p-card>
-    <div class="flex flex-wrap gap-2 align-items-center justify-content-between">
-        <h4>Acompanhamento ao vivo</h4>
-    </div>
+<p-card header="Informações do meu centro de custos">
     <div class="p-fluid p-formgrid grid" style="margin-top: 5px;">
         <div class="field col-6 md:col-6" style="margin-bottom: 0;">
-            <label for="category">Centro de Custo:</label>
-            <span style="font-weight: bold;"> {{center_cost.cost_center_name}} </span>
+            <label for="category" style="font-weight: bold;">Centro de Custo:</label>
+            <span> {{healthC.cost_center_name}} </span>
         </div>
         <div class="field col-6 md:col-6" style="margin-bottom: 0;">
-            <label for="category">Orçamento Trimestral:</label>
-            <span style=" font-weight: bold;"> R$: {{center_cost.annual_budget}} </span>
+            <label for="category" style=" font-weight: bold;">Orçamento Trimestral do Centro de Custos:</label>
+            <span> R$: {{center_cost.annual_budget}}</span>
         </div>
     </div>
-    <div class="p-fluid p-formgrid grid" style="margin-top: 5px;">
-        <div class="field col-6 md:col-6" style="margin-bottom: 0;">
-            <label for="category">Custos Fixos Totais:</label>
-            <span style=" font-weight: bold;"> R$: 900.000 </span>
-        </div>
-        <div class="field col-6 md:col-6" style="margin-bottom: 0;">
-            <label for="category">Custos Variáveis Totais:</label>
-            <span style=" font-weight: bold;"> R$: 15.000 </span>
-        </div>
-    </div>
-</p-card>
-<p-card>
     <h4>Budget Atual Usado: (%)</h4>
         <div style="display: flex; margin-left: 95%;">
             <p-button icon="pi pi-info" [rounded]="true" severity="info"  (onClick)="openModal()" />
@@ -38,7 +23,16 @@
             <p-meterGroup [value]="value" />
         </div>
 </p-card>
-
+<br>
+<p-card header="Informações da Área por completo">
+    <div class="flex flex-wrap gap-2 align-items-center justify-content-between">
+        <h4>Acompanhamento ao vivo da saúde: {{healthC.area_name}} </h4>
+        <div class="field col-6 md:col-6" style="margin-bottom: 0;">
+            <label for="category" style="font-weight: bold; color: rgb(114, 11, 7);">Valor Atual para Rateio do Trimestre:</label>
+            <span style="font-weight: bold; color:  rgb(114, 11, 7);"> R$: {{healthC.value_total}},00</span>
+        </div>
+    </div>
+</p-card>
 <p-dialog [(visible)]="displayInfo" [modal]="true" showEffect="fade" [style]="{width: '32vw'}" [breakpoints]="{'330x':'30vw'}">
     <h4>Informações para Apoio de Decisão  <i class="pi pi-microchip-ai" style="font-size: 1rem"></i></h4>
     <p>{{messageInfo}}</p>

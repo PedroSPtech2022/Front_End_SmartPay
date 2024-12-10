@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient,HttpHeaders,HttpResponse } from "@angular/common/http";
 import { Employee, EmployeeUser } from '../interface/interface-employee';
 import { enviroment } from '../enviroments/enviroment';
-import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +9,7 @@ import { Observable } from 'rxjs';
 
 export class ListEmployeeService {
 
-  private apiUrl = `${enviroment.apiUrl}/v1`
+  private apiUrl = `http://54.91.7.234:8080/api/v1`
 
   list: Employee[] = [];
 
@@ -25,7 +24,7 @@ export class ListEmployeeService {
       return new HttpHeaders({
           'Access-Control-Allow-Origin':'*',
           'Content-Type':'application/json',
-          'authorization': 'authorization' 
+          'Authorization': 'authorization' 
       })
   }
 

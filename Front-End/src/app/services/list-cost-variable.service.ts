@@ -10,7 +10,7 @@ import { Cost_Variable } from '../interface/interface-cost-variable';
 
 export class ListCostVariableService {
 
-  private apiUrl = `${enviroment.apiUrl}/v1`
+  private apiUrl = `http://54.91.7.234:8080/api/v1`
 
   list: Cost_Variable[] = [];
 
@@ -20,7 +20,7 @@ export class ListCostVariableService {
       return new HttpHeaders({
           'Access-Control-Allow-Origin':'*',
           'Content-Type':'application/json',
-          'authorization': 'authorization' 
+          'Authorization': 'authorization' 
       })
   }
 
@@ -62,7 +62,7 @@ export class ListCostVariableService {
       "variable_type": costVariable.type_variable,
       "date": costVariable.date,
       "responsible": costVariable.responsible,
-      "approved": true
+      "approved": costVariable.approval
     }
     return this.http.patch(end_point,patchCostC,{headers, observe: 'response'}).toPromise().then(res => res).catch(error => { console.error('Erro no End-Point',error); throw error});
   }

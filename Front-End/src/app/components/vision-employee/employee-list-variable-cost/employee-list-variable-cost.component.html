@@ -38,7 +38,7 @@
 <p-dialog [(visible)]="display" [modal]="true" showEffect="fade" [style]="{width: '32vw'}" [breakpoints]="{'960px':'78vw'}">
         <h4>Cadastro de Custo Variável</h4>
 
-            <p class="line-height-3 m-0" style="margin-top: 5px;">Custo:</p>
+            <p class="line-height-3 m-0" style="margin-top: 5px;">Nome do Custo:</p>
             <div class="p-fluid p-formgrid grid">
                 <div class="field col-12 md:col-12" style="margin-bottom: 0;">
                     <input pInputText [(ngModel)]="cost.obs" type="text" id="obs">
@@ -52,33 +52,34 @@
                 </div>
             </div>
 
-            <p class="line-height-3 m-0" style="margin-top: 5px;">Tipo de Custo:</p>
+            <div class="p-fluid p-formgrid grid" style="margin-top: 5px;">
+                <div class="field col-6 md:col-6" style="margin-bottom: 0;">
+                    <label for="category">Categoria:</label>
+                     <p-dropdown appendTo="body" class="block w-full" [options]="categorys" [(ngModel)]="cost.category" placeholder="Selecione uma categoria:" optionLabel="label" optionValue="value" (onChange)="postSelected($event)">
+                    </p-dropdown>
+                    <!-- <input pInputText [(ngModel)]="cost.category" type="text" id="value"> -->
+                </div>
+                <div class="field col-6 md:col-6" style="margin-bottom: 0;">
+                    <label for="methods_payment">Metodo de Pagamento:</label>
+                    <p-dropdown appendTo="body" class="block w-full" [options]="methodsPay" [(ngModel)]="cost.payment_method" placeholder="Selecione um metodo:" optionLabel="label" optionValue="value" (onChange)="postSelected($event)">
+                    </p-dropdown>
+                    <!-- <input pInputText [(ngModel)]="cost.payment_method" type="text" id="value"> -->
+                </div>
+            </div>
+
+            <p class="line-height-3 m-0" style="margin-top: 5px;">Tipo:</p>
             <div class="p-fluid p-formgrid grid">
                 <div class="field col-12 md:col-12" style="margin-bottom: 0;">
                     <input pInputText [(ngModel)]="cost.type_variable" type="text" id="value">
                 </div>
             </div>
 
-            <div class="p-fluid p-formgrid grid" style="margin-top: 5px;">
-                <div class="field col-6 md:col-6" style="margin-bottom: 0;">
-                    <label for="category">Categoria:</label>
-                     <!-- <p-dropdown appendTo="body" class="block w-full" [options]="methodsPay" [(ngModel)]="nMethodsPay" placeholder="Selecione um metodo de pagamento:" optionLabel="label" optionValue="value" (onChange)="postSelected($event)">
-                    </p-dropdown> -->
-                    <input pInputText [(ngModel)]="cost.category" type="text" id="value">
-
-                </div>
-                <div class="field col-6 md:col-6" style="margin-bottom: 0;">
-                    <label for="methods_payment">Metodo de Pagamento:</label>
-                    <!-- <p-dropdown appendTo="body" class="block w-full" [options]="methodsPay" [(ngModel)]="nMethodsPay" placeholder="Selecione um metodo de pagamento:" optionLabel="label" optionValue="value" (onChange)="postSelected($event)">
-                    </p-dropdown> -->
-                    <input pInputText [(ngModel)]="cost.payment_method" type="text" id="value">
-                </div>
-            </div>
+          
         
             <p class="line-height-3 m-0" style="margin-top: 5px;">Data:</p>
             <div class="p-fluid p-formgrid grid">
                 <div class="field col-6 md:col-6" style="margin-bottom: 0;">
-                    <p-calendar id="date" [(ngModel)]="cost.date" dateFormat="dd.mm.yy" [showIcon]="true" [showOnFocus]="false"/>
+                    <p-calendar id="date" [(ngModel)]="displayDate" dateFormat="dd.mm.yy" [showIcon]="true" [showOnFocus]="false" (onSelect)="onDateSelect($event)"></p-calendar>
                 </div>
                 <div class="field col-6 md:col-6" style="margin-bottom: 0;">
                     <p-fileUpload mode="basic" chooseLabel="Upload Pdf" chooseIcon="pi pi-upload" accept=".pdf" type="file" (change)="fileUploadPDF($event)"/>    

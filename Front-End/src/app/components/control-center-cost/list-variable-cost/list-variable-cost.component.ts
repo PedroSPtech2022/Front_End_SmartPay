@@ -27,8 +27,8 @@ export class ListVariableCostComponent {
 
     constructor(private router: Router, private listCostVariableService: ListCostVariableService){
         this.stats = [
-            {label:'Aprovar',value:'desativar'},
-            {label:'Desaprovar',value:'ativar'}
+            {label:'Aprovar',value:true},
+            {label:'Desaprovar',value:false}
         ]
     }
 
@@ -60,6 +60,7 @@ export class ListVariableCostComponent {
 
     callUpdateCost(){
         console.log(this.cost)
+        this.cost.approval = this.nStats
         this.listCostVariableService.patchCost(this.cost).then(res =>{
             if(res.status == 200){
                 this.sucessMessage = "Situação do custo variável salva";

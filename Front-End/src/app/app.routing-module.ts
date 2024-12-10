@@ -11,13 +11,12 @@ import { EmployeeListVariableCostComponent } from './components/vision-employee/
 import { InfoCenterCostComponent } from './components/control-center-cost/info-center-cost/info-center-cost.component';
 
 export const routes: Routes = [
-    // {path:'executivo/analytics', component: ControlExecutivoAnalyticsComponent}
     {path:'login', component: LoginComponent},
+    {path:'home', component: InfoCenterCostComponent},
     {path:'executivo/first-acess', component: FirstAcessExecutivoComponent},
     {path:'executivo/list-employee', component: ListEmployeeComponent},
     {path:'executivo/registry-employee', component: RegistryEmployeeComponent},
     {path:'executivo/list-cost-variable', component: ListVariableCostComponent},
-    {path:'executivo/info-center-cost', component:InfoCenterCostComponent},
     {path:'employee/list-cost-variable', component: EmployeeListVariableCostComponent},
     {path:'',redirectTo:'login', pathMatch:'full'},
     {path:'**',redirectTo:'/notFound'},

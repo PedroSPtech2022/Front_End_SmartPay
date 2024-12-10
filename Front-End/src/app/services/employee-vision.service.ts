@@ -12,7 +12,7 @@ import { Cost_Variable } from '../interface/interface-cost-variable';
 
 export class EmployeeVisionService {
 
-  private apiUrl = `${enviroment.apiUrl}/v1`
+  private apiUrl = `http://54.91.7.234:8080/api/v1`
 
   constructor(private http:HttpClient) { }
 
@@ -20,7 +20,7 @@ export class EmployeeVisionService {
       return new HttpHeaders({
         'Access-Control-Allow-Origin':'*',
         'Content-Type':'application/json',
-        'authorization': 'authorization' 
+        'Authorization': 'authorization' 
       })
   }
 
@@ -28,7 +28,8 @@ export class EmployeeVisionService {
     return new HttpHeaders({
       'Content-Type':'application/pdf',
       'Access-Control-Allow-Methods': '*',
-      'Access-Control-Allow-Origin': '*'
+      'Access-Control-Allow-Origin': '*',
+      'Authorization': 'authorization' 
     })
 }
 

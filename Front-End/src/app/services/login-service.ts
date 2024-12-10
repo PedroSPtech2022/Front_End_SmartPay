@@ -8,8 +8,7 @@ import { Login, Login_Response } from "../interface/interface-login";
 })
 export class LoginService {
 
-    private url = "http://54.211.59.240:8080/api/v1/login"
-
+    private url = "http://54.91.7.234:8080/api/v1/login"
 
     constructor(private http: HttpClient, private router:Router) { }
 
@@ -17,12 +16,11 @@ export class LoginService {
         const headers = new HttpHeaders({
             'Content-Type':'application/json',
             "Acess-Control-Allow-Origin":"*",
-            'authorization': 'authorization'
+            'Authorization': 'authorization'
         });
         return this.http.post(this.url, JSON.stringify(login), { headers: headers, observe: 'response' }).toPromise().then(res => res).catch(error => { throw error; });
     }
     
-
     isLoggedIn():boolean{
         const perfil = sessionStorage.getItem('type_user');
         return perfil ? true: false;

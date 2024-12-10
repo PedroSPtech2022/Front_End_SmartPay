@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 })
 export class FirstAcessService {
 
-  private apiUrl = `${enviroment.apiUrl}/v1/`
+  private apiUrl = `http://54.91.7.234:8080/api/v1/`
 
   constructor(private http:HttpClient) { }
 
@@ -18,7 +18,7 @@ export class FirstAcessService {
       return new HttpHeaders({
           'Access-Control-Allow-Origin':'*',
           'Content-Type':'application/json',
-          'authorization': 'authorization' 
+          'Authorization': 'authorization' 
       })
   }
 

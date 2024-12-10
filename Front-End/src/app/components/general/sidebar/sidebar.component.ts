@@ -31,6 +31,17 @@ export class SidebarComponent {
           separator:true
         },
         {
+          items:[
+            {
+            label:'Home',
+            icon:'pi pi-home',
+            url: '/home'
+          }
+          ],          
+        }, {
+          separator:true
+        },
+        {
           label:'Controle de Gastos Variaveis',
           items:[
             {
@@ -56,18 +67,6 @@ export class SidebarComponent {
             icon:'pi pi-users',
             url:'/executivo/list-employee'
           }],          
-        },
-        {
-          separator:true
-        },
-        {
-          label:'Controle do Centro de Custos',
-          items:[
-            {
-            label:'Informações de Centro de Custos',
-            icon:'pi pi-exclamation-circle',
-            url: '/executivo/info-center-cost'
-          },],          
         },
         {
           separator:true
