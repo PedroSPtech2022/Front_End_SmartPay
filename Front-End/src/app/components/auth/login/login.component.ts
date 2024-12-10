@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit{
   messageError: string = '';
 
   logins: Login = {};
-  logins_res: Login_Response = {token:'',name: '', email: '', password:'', type_user: '',id_executive: '',id_cost_center: ''};
+  logins_res: Login_Response = {token:'',name: '', email: '', password:'', type_user: '',id_executive: '',id_cost_center: '',id_area: ''};
 
   constructor(private router: Router, private loginService: LoginService){}
 
@@ -27,13 +27,14 @@ export class LoginComponent implements OnInit{
     table.filterGlobal((event.target as HTMLInputElement).value, 'contains')
   }
   
-  saveSession(name:string,type_user:string,email:string,token:string,id_executive:string,id_cost_center:string){
+  saveSession(name:string,type_user:string,email:string,token:string,id_executive:string,id_cost_center:string, id_area:string){
     sessionStorage.setItem("name",name);
     sessionStorage.setItem("type_user",type_user);
     sessionStorage.setItem("token",token);
     sessionStorage.setItem("email",email);
     sessionStorage.setItem("id_executive",id_executive);
     sessionStorage.setItem("id_cost_center",id_cost_center);
+    sessionStorage.setItem("id_cost_center",id_area)
   }
 
   loadingLogin(){
@@ -42,12 +43,13 @@ export class LoginComponent implements OnInit{
     this.loginService.loadingLogin(this.logins).then(res =>{
         this.logins_res = res.body;
         this.isLoading = true;
+        console.log(this.logins_res)
 
         if(this.logins_res.type_user === 'EXEC'){
-          this.saveSession(this.logins_res.name,this.logins_res.type_user,this.logins_res.email,this.logins_res.token,this.logins_res.id_executive,this.logins_res.id_cost_center);
+          this.saveSession(this.logins_res.name,this.logins_res.type_user,this.logins_res.email,this.logins_res.token,this.logins_res.id_executive,this.logins_res.id_cost_center, this.logins_res.id_area);
           this.router.navigateByUrl('executivo/list-employee');
         }else if(this.logins_res.type_user === 'FUNC'){
-          this.saveSession(this.logins_res.name,this.logins_res.type_user,this.logins_res.email,this.logins_res.token,this.logins_res.id_executive,this.logins_res.id_cost_center);
+          this.saveSession(this.logins_res.name,this.logins_res.type_user,this.logins_res.email,this.logins_res.token,this.logins_res.id_executive,this.logins_res.id_cost_center,this.logins_res.id_area);
           this.router.navigateByUrl('employee/list-cost-variable');
         } else {
           this.messageError = 'Erro ao tentar Logar';

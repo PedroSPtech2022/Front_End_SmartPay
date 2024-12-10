@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component ,ViewChild, ElementRef} from '@angular/core';
 import { Cost_Variable } from '../../../interface/interface-cost-variable';
 import { Router } from '@angular/router';
 import { Table } from 'primeng/table';
 import { EmployeeVisionService } from '../../../services/employee-vision.service';
-
+import { HttpClient,HttpHeaders } from '@angular/common/http';
+import { MessageService } from 'primeng/api';
 
 interface UploadEvent {
     originalEvent: Event;
@@ -12,12 +13,15 @@ interface UploadEvent {
 @Component({
   selector: 'app-employee-list-variable-cost',
   templateUrl: './employee-list-variable-cost.component.html',
-  styleUrl: './employee-list-variable-cost.component.css'
+  styleUrl: './employee-list-variable-cost.component.css',
+  providers: [MessageService]
 })
 export class EmployeeListVariableCostComponent {
 
     display: boolean = false;
     displayInfo: boolean = false;
+    @ViewChild('fileInput') fileInput: ElementRef | undefined;
+    fileToUpload: File | null = null;  
 
     costdt: { date: string | null } = { date: null }; // Armazena no formato "06;09.2024"
     displayDate: Date | null = null; // Mantém o valor para exibição no calendário
@@ -38,7 +42,7 @@ export class EmployeeListVariableCostComponent {
     categorys: any[];
     nCategorys: any;
 
-    constructor(private router: Router, private employeeVisionService:EmployeeVisionService){
+    constructor(private router: Router, private employeeVisionService:EmployeeVisionService, private http: HttpClient, private messageService: MessageService){
         this.stats = [
             {label:'Aprovar',value:'desativar'},
             {label:'Desaprovar',value:'ativar'}
@@ -62,30 +66,49 @@ export class EmployeeListVariableCostComponent {
         this.getCosts();
     }
 
-    // fileUploadPDF(event:any) {
-    //     // let targetEvent = event.target;
-    //     // let file:File = targetEvent.files[0];
-    //     // let fileReader:FileReader = new FileReader();
-    //     // fileReader.onload = (e)=>{
-    //     //     this.arqBase64 = this.arq
-    //     // }
-    // }
-
-    fileUploadPDF(event:any) {
-        const file: File = event.target.files[0];
-        this.uploadFile(file);
-    }
-
-      uploadFile(file:File) {
-        this.employeeVisionService.uploadFile(file).subscribe(
-          data => {
-            console.log(data);
-          },
-          error => {
-            console.error(error);
-          }
-        );
+    // Função para enviar o arquivo ao S3
+    onFileSelect(event: any): void {
+        const file = event.target.files[0]; // Pega o primeiro arquivo selecionado
+        if (file) {
+          this.fileToUpload = file;  // Armazena o arquivo
+          console.log('Arquivo selecionado:', file); // Verificar no console
+        }
       }
+    
+      // Função para enviar o arquivo ao S3
+      onUpload(): void {
+        if (!this.fileToUpload) {
+          console.log('Nenhum arquivo selecionado');
+          this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Por favor, selecione um arquivo para enviar.' });
+          return;
+        }
+    
+        const file = this.fileToUpload;
+        const fileName = file.name; // Nome do arquivo
+        const bucketUrl = 'https://bucket-kaique-raw.s3.amazonaws.com'; 
+        const uploadUrl = `${bucketUrl}/${fileName}`; // URL completa para o upload
+    
+        console.log('URL do upload:', uploadUrl); // Verificar a URL do upload
+    
+        const headers = new HttpHeaders({
+          'Content-Type': file.type,
+          'x-amz-acl': 'bucket-owner-full-control',  // ACL para garantir controle total do arquivo
+        });
+    
+        // Realiza a requisição PUT para o S3
+        this.http.put(uploadUrl, file, { headers })
+          .subscribe(
+            response => {
+              console.log('Arquivo enviado com sucesso!', response);
+              this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Arquivo enviado com sucesso!' });
+            },
+            error => {
+              console.error('Erro ao enviar o arquivo:', error);
+              this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Falha no envio do arquivo.' });
+            }
+          );
+      }
+
       onDateSelect(event: Date): void {
         // Atualiza a data no formato customizado
         const day = event.getDate().toString().padStart(2, '0');
@@ -118,7 +141,7 @@ export class EmployeeListVariableCostComponent {
     }
 
     registryCost(){
-        this.cost.approval = false;   
+        this.cost.approval = true;   
         console.log(this.cost.date)
         var responsible = sessionStorage.getItem('name');
         if (responsible !== null) {

@@ -8,7 +8,7 @@ import { Login, Login_Response } from "../interface/interface-login";
 })
 export class LoginService {
 
-    private url = "http://54.91.7.234:8080/api/v1/login"
+    private url = "http://107.21.189.77:8080/api/v1/login"
 
     constructor(private http: HttpClient, private router:Router) { }
 

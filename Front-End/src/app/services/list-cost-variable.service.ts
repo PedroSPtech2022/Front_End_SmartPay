@@ -10,7 +10,7 @@ import { Cost_Variable } from '../interface/interface-cost-variable';
 
 export class ListCostVariableService {
 
-  private apiUrl = `http://54.91.7.234:8080/api/v1`
+  private apiUrl = `http://107.21.189.77:8080/api/v1`
 
   list: Cost_Variable[] = [];
 

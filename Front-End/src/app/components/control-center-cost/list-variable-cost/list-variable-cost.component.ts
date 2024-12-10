@@ -36,6 +36,16 @@ export class ListVariableCostComponent {
         this.getCostVariable();
     }
 
+
+    fileName: string = 'arquivo.pdf';
+    bucketUrl: string = 'https://bucket-kaique-raw.s3.amazonaws.com'; // URL do seu bucket S3
+
+    // Função para abrir o PDF em uma nova aba
+    openPDF(): void {
+        const fileUrl = `${this.bucketUrl}/${this.fileName}`; // Construir a URL do arquivo no S3
+        window.open(fileUrl, '_blank'); // Abre o PDF em uma nova aba
+    }
+
     onGlobalFilter(table:Table, event: Event){
         table.filterGlobal((event.target as HTMLInputElement).value,'contains')
     }

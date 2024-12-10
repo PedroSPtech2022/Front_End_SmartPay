@@ -7,5 +7,5 @@ export interface Cost_Variable{
     category?: string,
     payment_method?: string,
     obs?: string,
-    approval?: boolean,
+    approval?: boolean | null,
 }

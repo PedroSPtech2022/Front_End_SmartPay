@@ -11,4 +11,5 @@ export interface Login_Response{
     token: string;
     id_executive: string;
     id_cost_center:string;
+    id_area:string;
 }

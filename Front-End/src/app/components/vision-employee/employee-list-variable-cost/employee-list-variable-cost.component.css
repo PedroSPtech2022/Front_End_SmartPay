@@ -1,0 +1,43 @@
+/* Estilo do container do upload */
+.file-upload-container {
+display: flex;
+flex-direction: column;
+gap: 10px;
+align-items: center;
+padding: 20px;
+background-color: #f9f9f9;
+border-radius: 8px;
+box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Oculta o input original */
+input[type="file"] {
+display: none;
+}
+
+/* Estilo do botão "Escolher Arquivo" */
+.upload-button {
+padding: 10px 20px;
+background-color: #007bff;
+color: white;
+border: none;
+border-radius: 5px;
+font-size: 16px;
+cursor: pointer;
+transition: background-color 0.3s;
+width: 200px;
+text-align: center;
+}
+
+.upload-button:hover {
+background-color: #0056b3;
+}
+
+/* Estilo do botão "Enviar" */
+.upload-button:last-child {
+background-color: #28a745;
+}
+
+.upload-button:last-child:hover {
+background-color: #218838;
+}  

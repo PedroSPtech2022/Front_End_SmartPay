@@ -29,7 +29,7 @@
                     <span *ngIf="cost.approval === false">Não aprovado</span>
                     <span *ngIf="cost.approval === true">Aprovado</span>
                 </td>
-                <td><p-button icon="pi pi-file-pdf" [rounded]="true" severity="help" /></td>
+                <td><p-button icon="pi pi-file-pdf" [rounded]="true" severity="help" (click)="openPDF()" /></td>
                 <td><p-button icon="pi pi-pencil" [rounded]="true" severity="danger"  (onClick)="openModal(cost)" /></td>
                 <td><p-button icon="pi pi-info" [rounded]="true" severity="info"  (click)="openModalInfo(cost)"></p-button></td>
             </tr>

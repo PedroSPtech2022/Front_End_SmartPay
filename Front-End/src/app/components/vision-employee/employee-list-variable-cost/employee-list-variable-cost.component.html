@@ -27,6 +27,7 @@
                         <td>
                             <span *ngIf="cost.approval === false">Não aprovado</span>
                             <span *ngIf="cost.approval === true">Aprovado</span>
+                            <span *ngIf="cost.approval === null">Em Analise</span>
                         </td>
                         <td><p-button icon="pi pi-info" [rounded]="true" severity="info"  (onClick)="openModal(cost)" /></td>
                     </tr>
@@ -82,7 +83,18 @@
                     <p-calendar id="date" [(ngModel)]="displayDate" dateFormat="dd.mm.yy" [showIcon]="true" [showOnFocus]="false" (onSelect)="onDateSelect($event)"></p-calendar>
                 </div>
                 <div class="field col-6 md:col-6" style="margin-bottom: 0;">
-                    <p-fileUpload mode="basic" chooseLabel="Upload Pdf" chooseIcon="pi pi-upload" accept=".pdf" type="file" (change)="fileUploadPDF($event)"/>    
+                    <p-toast></p-toast>
+                    <!-- <p-fileUpload name="file" url="https://bucket-kaique-raw.s3.amazonaws.com" [customUpload]="true" (onUpload)="onUpload($event)" (onError)="onError($event)" accept="application/pdf" chooseLabel="Escolher Arquivo" uploadLabel="Enviar"cancelLabel="Cancelar"></p-fileUpload> -->
+                    <div class="file-upload-container">
+                        <!-- Input de arquivo oculto -->
+                        <input type="file" id="fileInput"  #fileInput (change)="onFileSelect($event)" accept="application/pdf" />
+                        
+                        <!-- Botão estilizado -->
+                        <button class="upload-button" (click)="fileInput.click()">Escolher Arquivo</button>
+                        
+                        <button class="upload-button" (click)="onUpload()">Enviar</button>
+                      </div>
+                      
                 </div>
             </div>
 
