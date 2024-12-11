@@ -1,0 +1,16 @@
+.status {
+    font-weight: bold; /* Torna o texto mais evidente */
+  }
+  
+  .not-approved {
+    color: red;
+  }
+  
+  .approved {
+    color: green;
+  }
+  
+  .in-analysis {
+    color: orange;
+  }
+  

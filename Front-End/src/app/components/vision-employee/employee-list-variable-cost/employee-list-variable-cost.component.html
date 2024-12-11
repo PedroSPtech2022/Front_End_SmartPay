@@ -25,9 +25,9 @@
                         <td>{{cost.obs}}</td>
                         <td>{{cost.date}}</td>
                         <td>
-                            <span *ngIf="cost.approval === false">Não aprovado</span>
-                            <span *ngIf="cost.approval === true">Aprovado</span>
-                            <span *ngIf="cost.approval === null">Em Analise</span>
+                            <span *ngIf="cost.approval === false" class="status not-approved">Não aprovado</span>
+                            <span *ngIf="cost.approval === true" class="status approved">Aprovado</span>
+                            <span *ngIf="cost?.approval === undefined" class="status in-analysis">Em Analise</span>
                         </td>
                         <td><p-button icon="pi pi-info" [rounded]="true" severity="info"  (onClick)="openModal(cost)" /></td>
                     </tr>

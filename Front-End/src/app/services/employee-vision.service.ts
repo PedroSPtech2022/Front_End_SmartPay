@@ -12,7 +12,7 @@ import { Cost_Variable } from '../interface/interface-cost-variable';
 
 export class EmployeeVisionService {
 
-  private apiUrl = `http://107.21.189.77:8080/api/v1`
+  private apiUrl = `http://54.197.45.43:8080/api/v1`
 
   constructor(private http:HttpClient) { }
 
@@ -46,6 +46,8 @@ export class EmployeeVisionService {
   registryCost(registry_cost: Cost_Variable): Promise<any>{
     const end_point = this.apiUrl + '/create-variable-cost/' + this.getNumberCenterCost();
     const headers = this.getHeaders();
+    console.log('esse foi o custo que chegou',registry_cost)
+    console.log(end_point)
     return this.http.post(end_point,registry_cost,{headers, observe: 'response'}).toPromise().then(res => res).catch(error => { console.error('Erro no End-Point',error); throw error});
   }
 

@@ -41,3 +41,21 @@ background-color: #28a745;
 .upload-button:last-child:hover {
 background-color: #218838;
 }  
+
+
+.status {
+    font-weight: bold; /* Torna o texto mais evidente */
+  }
+  
+  .not-approved {
+    color: red;
+  }
+  
+  .approved {
+    color: green;
+  }
+  
+  .in-analysis {
+    color: orange;
+  }
+  

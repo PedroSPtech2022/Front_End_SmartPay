@@ -9,7 +9,7 @@ import { enviroment } from '../enviroments/enviroment';
 
 export class ListEmployeeService {
 
-  private apiUrl = `http://107.21.189.77:8080/api/v1`
+  private apiUrl = `http://54.197.45.43:8080/api/v1`
 
   list: Employee[] = [];
 

@@ -18,7 +18,6 @@ export class ListVariableCostComponent {
     messageError = "";
     sucessMessage = "";
 
-
     costs: Cost_Variable[] = [];
     cost: Cost_Variable = {};
 
@@ -87,7 +86,7 @@ export class ListVariableCostComponent {
             }
            },
            (error)=>{
-             this.messageError = "Erro aoatualizar custo variável";
+             this.messageError = "Erro ao atualizar custo variável";
              setTimeout(() => {
                 this.messageError = ""; // Limpa a mensagem após 5 segundos
                 //window.location.reload(); // Recarrega a página

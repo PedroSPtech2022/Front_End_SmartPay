@@ -141,7 +141,7 @@ export class EmployeeListVariableCostComponent {
     }
 
     registryCost(){
-        this.cost.approval = true;   
+        this.cost.approval = null;   
         console.log(this.cost.date)
         var responsible = sessionStorage.getItem('name');
         if (responsible !== null) {
